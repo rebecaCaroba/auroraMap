@@ -1,0 +1,70 @@
+@import '../../style/config/variables';
+
+.cadastro {
+    background-color: #f8f9fa;
+
+    .cadastro-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        min-height: 100vh;
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: $c-gray-600;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid $c-gray-150;
+        }
+
+        .cadastro-content {
+            background-color: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 0;
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            width: 100%;
+            max-width: 500px;
+
+            form {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+
+                .form-group {
+                    margin-bottom: 20px;
+                }
+
+                label {
+                    display: block;
+                    margin-bottom: 0.5rem;
+                }
+
+                input {
+                    width: 100%;
+                    padding: 12px;
+                    border: 2px solid $c-gray-150;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    transition: border-color 0.3s ease;
+                }
+
+                button {
+                    margin-top: 1rem;
+                    background: linear-gradient(45deg, $c-first, $c-secondary);
+                    color: white;
+                    padding: 12px 24px;
+                    border: none;
+                    border-radius: 25px;
+                    text-decoration: none;
+                    font-weight: 600;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+
+
+            }
+        }
+
+    }
+}
