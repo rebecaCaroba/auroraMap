@@ -1,4 +1,4 @@
-import { Header } from "../components/Header";
+import { Header } from "../../components/Header";
 import { AiOutlineCaretRight } from "react-icons/ai";
 import { FaCircleExclamation, FaMobileScreenButton, FaShield } from "react-icons/fa6";
 import { FaMapMarkedAlt, FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
@@ -6,7 +6,7 @@ import { HiMiniUserGroup } from "react-icons/hi2";
 import { IoIosNotifications } from "react-icons/io";
 import { BsGraphUp } from "react-icons/bs";
 
-import { Stats } from "../components/Stats";
+import { Stats } from "../../components/Stats";
 import Link from "next/link";
 import './style.scss'
 

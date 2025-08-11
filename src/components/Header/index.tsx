@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import logo from '../../../../public/aurora-boreal.png'
+import logo from '../../../public/aurora-boreal.png'
 import Image from "next/image";
 import './style.scss';
 
@@ -18,7 +18,7 @@ export function Header() {
                     <li><a href="#contact">Contato</a></li>
                 </ul>
 
-                <div>
+                <div className='header-buttons'>
                     <Link href="/login" className="login-button"> Login</Link>
                     <Link href="/cadastro" className="register-button"> Cadastro</Link>
                 </div>
