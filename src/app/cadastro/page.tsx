@@ -9,6 +9,10 @@ export default function Cadastro() {
                     <h1>Cadastro</h1>
                     <form>
                         <div className="form-group">
+                            <label htmlFor="name">Nome:</label>
+                            <input type="text" name="name" id="name" />
+                        </div>
+                        <div className="form-group">
                             <label htmlFor="email">Email:</label>
                             <input type="email" name="email" id="email" />
                         </div>

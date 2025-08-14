@@ -31,7 +31,7 @@ export default function Home() {
         </div>
     </section>
 
-    <section className="home-home-features" id="home-home-features">
+    <section className="home-features" id="home-home-features">
         <div className="container">
             <h2 className="home-how-it-works-title">Recursos Principais</h2>
             <div className="home-home-features-grid">

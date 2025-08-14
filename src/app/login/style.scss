@@ -1,7 +1,11 @@
 @import '../../style/config/variables';
 
 .login {
-    background-color: #f8f9fa;
+    background-color: $c-gray-100;
+
+    @media (max-width: 768px) {
+        padding: 1.5rem;
+    }
 
     .login-container {
         display: flex;

@@ -19,6 +19,10 @@
         .header-button-menu-bar {
             display: none;
             cursor: pointer;
+        
+            svg {
+                color: $c-gray-700;
+            }
 
             button {
                 border: 0;

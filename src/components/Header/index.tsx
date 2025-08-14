@@ -33,7 +33,7 @@ export function Header() {
                 <div className="header-button-menu-bar">
                     <button onClick={() => setIsMenuBar(!isMenuBar)}>
                         
-                        {isMenuBar ? <RiMenuFold4Line size={24} /> : <RiMenuFold3Line size={24} />}
+                        {isMenuBar ? <RiMenuFold4Line size={32} /> : <RiMenuFold3Line size={32} />}
                     </button>
                 </div>
             </nav>
