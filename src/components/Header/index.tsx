@@ -1,5 +1,5 @@
 'use client'
-import { AiOutlineMenu } from "react-icons/ai";
+import { RiMenuFold4Line, RiMenuFold3Line  } from "react-icons/ri";
 import Link from 'next/link';
 import logo from '../../../public/aurora-boreal.png'
 import Image from "next/image";
@@ -14,30 +14,29 @@ export function Header() {
 
     return (
         <header className='header'>
-            <div className="header-container">
+            <nav className='header-content'>
                 <div className="logo">
                     <Image src={logo} alt="logo" width={50} />
                     AuroraMap
                 </div>
-                <nav className={`header-content ${isMenuBar ? 'header-is-menu-bar' : ' '}`}>
-                    <ul className='header-nav-links'>
-                        <li><a href="#home">Início</a></li>
-                        <li><a href="#home-home-features">Recursos</a></li>
-                        <li><a href="#home-how-it-works">Como Funciona</a></li>
-                        <li><a href="#contact">Contato</a></li>
-                    </ul>
-
+                <ul className={`header-nav-links ${isMenuBar ? 'header-is-menu-bar' : ' '}`}>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#home-home-features">Recursos</a></li>
+                    <li><a href="#home-how-it-works">Como Funciona</a></li>
+                    <li><a href="#contact">Contato</a></li>
                     <div className='header-buttons'>
                         <Link href="/cadastro" className="register-button"> Cadastro</Link>
                         <Link href="/login" className="login-button"> Login</Link>
                     </div>
-                </nav>
-                <div className="header-menu-bar">
+                </ul>
+
+                <div className="header-button-menu-bar">
                     <button onClick={() => setIsMenuBar(!isMenuBar)}>
-                        <AiOutlineMenu size={24} />
+                        
+                        {isMenuBar ? <RiMenuFold4Line size={24} /> : <RiMenuFold3Line size={24} />}
                     </button>
                 </div>
-            </div>
+            </nav>
         </header>
     )
 }
