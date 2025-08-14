@@ -10,30 +10,43 @@
     z-index: 1000;
     padding: 1rem;
 
+    .header-menu-bar {
+        display: none;
+        cursor: pointer;
+
+        @media (max-width: 845px) {
+            display: block;
+        }
+    }
+
+    .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: $c-first;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .header-aside {
+        background-color: aquamarine;
+    
+    }
+    .header-is-menu-bar {
+        display: block !important;
+    }
 
     .header-container {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        max-width: 1200px;
-        width: 100%;
-        margin: 0 auto;
         padding: 0 1rem;
+    }
 
-        .header-buttons {
-            a {
-                margin-left: 1rem;
-            }
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: $c-first;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    .header-content {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: end;
 
         .login-button {
             margin-top: 1rem;
@@ -48,15 +61,14 @@
         }
 
         .register-button {
-            margin-top: 1rem;
             color: $c-gray-900;
-            border: 2px solid $c-gray-900;
+            border: 2px solid $c-first;
             padding: 12px 24px;
-            border: none;
             border-radius: 25px;
             text-decoration: none;
             font-weight: 600;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 0 1rem;
         }
 
         .header-nav-links {
@@ -75,5 +87,10 @@
                 }
             }
         }
+        @media (max-width: 845px) {
+                display: none;
+            
     }
+    }
+
 }
