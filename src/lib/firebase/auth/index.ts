@@ -6,8 +6,15 @@ export async function signIn(email: string, password: string) {
     let err = null
     try {
         response = await signInWithEmailAndPassword(auth, email, password)
-    } catch (err) {
-        console.log(err)
+    } catch (error: any) {
+        const errorCode = error.code
+
+        if(errorCode == 'auth/invalid-credential') {
+            err = 'Email ou senha inválidos'
+        } else {
+            console.error('Erro ao fazer login', error.message)
+        }
+        
     }
     return { response, err }
 }

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import { createUser } from '../../lib/firebase/auth'
 import { isEmailCorrect } from '@/utils/isEmailCorrect';
-import { IsPasswordCorrect } from '@/utils/isPasswordCorrect';
+import { isConfirmPassword, IsPasswordCorrect } from '@/utils/isPasswordCorrect';
 import { useRouter } from 'next/navigation';
 
 interface ErrorFormType {
@@ -37,10 +37,18 @@ export function FormRegister() {
             });
         }
         
-        const isPassword = IsPasswordCorrect(password.trim(), confirmPassword.trim())
+        const isPassword = IsPasswordCorrect(password.trim())
         
         if (isPassword.error == true) {
-            console.log('223')
+            return setErrorForm({
+                location: "password",
+                message: isPassword.message,
+            });
+        }
+
+        const isConfirmPasswordResult = isConfirmPassword(password.trim(), confirmPassword.trim())
+        
+        if (isConfirmPasswordResult.error == true) {
             return setErrorForm({
                 location: "password",
                 message: isPassword.message,

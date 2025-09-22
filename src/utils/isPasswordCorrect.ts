@@ -3,7 +3,7 @@ interface Return {
     message: string
 }
 
-export function IsPasswordCorrect(password: string, confirmPassword: string): Return {
+export function IsPasswordCorrect(password: string): Return {
     if (password.length < 7) {
         return { message: 'A senha deve ser maior que 6 caracteres', error: true };
     }
@@ -12,11 +12,13 @@ export function IsPasswordCorrect(password: string, confirmPassword: string): Re
         return { message: 'A senha deve ser menor que 32 caracteres', error: true };
     }
 
+    return { message: 'A senha está correta', error: false };
+}
+
+export function isConfirmPassword(password: string, confirmPassword: string): Return {
     if (password !== confirmPassword) {
         return { message: 'As senhas não coincidem', error: true }
     }
 
-    return { message: 'A senha está correta', error: false };
-
-
+    return { message: 'As senhas coincidem', error: false };
 }
