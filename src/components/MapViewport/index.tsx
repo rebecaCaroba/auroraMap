@@ -2,16 +2,20 @@
 import { APIProvider, Map } from '@vis.gl/react-google-maps';
 import { FormEvent, useState } from 'react';
 import { ModalMapViewport } from '../ModalMapViewport';
+import { useMap } from '@/context/MapContext';
 
 
 export function MapViewport() {
-    
+    const { isOpenModal, openModalMap } = useMap()
+
     function handleAddZone(e: any) {
     
         const clickedPosition = {
             lat: e.detail.latLng.lat,
             lng: e.detail.latLng.lng
         }
+        
+        openModalMap()   
     }
 
     const App = () => (
@@ -29,7 +33,7 @@ export function MapViewport() {
 
     return (
         <div>
-            <ModalMapViewport />
+            {isOpenModal && <ModalMapViewport />}
             <App />
         </div>
     )

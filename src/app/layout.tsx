@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import '../style/global.scss'
+import { MapProvider } from "@/context/MapContext";
 
 export const metadata: Metadata = {
   title: "AuroraMap",
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <MapProvider>
+          {children}
+        </MapProvider>
       </body>
     </html>
   );

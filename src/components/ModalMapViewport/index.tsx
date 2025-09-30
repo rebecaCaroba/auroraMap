@@ -1,7 +1,10 @@
+import { useMap } from '@/context/MapContext'
 import './style.scss'
 export function ModalMapViewport() {
+    const { openModalMap } = useMap()
+
     function closeReportModal() {
-        console.log('closeReportModal')
+        openModalMap()
     }
 
     return (
