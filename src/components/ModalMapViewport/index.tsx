@@ -1,5 +1,8 @@
 import { useMap } from '@/context/MapContext'
 import './style.scss'
+
+// Passar a localização com long e lat, a key para mapear no componente PoiMarkers
+
 export function ModalMapViewport() {
     const { openModalMap } = useMap()
 
