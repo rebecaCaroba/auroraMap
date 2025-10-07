@@ -1,4 +1,4 @@
-import { app, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "../dbFirebase";
+import { app, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "../dbFirebase";
 
 export async function signIn(email: string, password: string) {
     let response = null
@@ -8,12 +8,12 @@ export async function signIn(email: string, password: string) {
     } catch (error: any) {
         const errorCode = error.code
 
-        if(errorCode == 'auth/invalid-credential') {
+        if (errorCode == 'auth/invalid-credential') {
             err = 'Email ou senha inválidos'
         } else {
             console.error('Erro ao fazer login', error.message)
         }
-        
+
     }
     return { response, err }
 }
@@ -31,8 +31,10 @@ export async function createUser(email: string, password: string) {
             err = 'Email já utilizado'
         } else {
             console.error("Erro ao registrar o usuário:", error.message);
-        } 
+        }
     }
     return { response, err }
 }
+
+
 

@@ -11,7 +11,7 @@ import { usePathname } from "next/navigation";
 export function Header() {
     const [isMenuBar, setIsMenuBar] = useState<boolean>(false)
     const router = usePathname();
-    console.log(router)
+    
     return (
         <header className='header'>
             <nav className='header-content'>

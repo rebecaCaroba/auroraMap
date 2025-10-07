@@ -1,10 +1,17 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
+import {
+  getDatabase,
+  child, 
+  get, 
+  onValue, 
+  ref, 
+  set 
+} from "firebase/database";
 import { 
   createUserWithEmailAndPassword, 
   getAuth, 
   onAuthStateChanged, 
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -30,6 +37,11 @@ export {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   db,
+  child,
+  get, 
+  onValue,
+  ref, 
+  set
 }
 
 

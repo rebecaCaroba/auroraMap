@@ -4,6 +4,7 @@ import { FormEvent, useState } from 'react'
 import './style.scss'
 import { ClickedPositionType } from '../MapViewport'
 import { setReportZone } from '@/lib/firebase/reportZone'
+import { useUser } from '@/context/UserContext'
 
 interface ModalMapViewportProps {
     coordinates: ClickedPositionType | null
@@ -11,6 +12,7 @@ interface ModalMapViewportProps {
 
 export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
     const { openModalMap } = useMap()
+    const { userUid } = useUser()
     const [dangerType, setDangerType] = useState<string>('')
     const [description, setDescription] = useState<string>('')
 
@@ -30,6 +32,7 @@ export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
             const { lat, lng } = coordinates
 
             const dataReportZone = {
+                userUid,
                 lat,
                 lng,
                 dangerType,

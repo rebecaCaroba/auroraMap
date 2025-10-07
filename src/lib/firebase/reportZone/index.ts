@@ -1,7 +1,7 @@
-import { child, get, onValue, ref, set } from "firebase/database";
-import { db } from "../dbFirebase";
+import { db, ref, set } from "../dbFirebase";
 
 interface SetReportZoneType {
+    userUid: string | null
     lat: number;
     lng: number;
     dangerType: string;
@@ -12,7 +12,7 @@ export async function setReportZone(data: SetReportZoneType) {
     let response = null
 
     try {
-        response = set(ref(db, 'reportZone/'), {
+        response = set(ref(db, 'reportZone/' + data.userUid), {
             lat: data.lat,
             lng: data.lng,
             dangerType: data.dangerType,

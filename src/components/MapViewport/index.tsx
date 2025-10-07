@@ -3,7 +3,7 @@ import { APIProvider, Map } from '@vis.gl/react-google-maps';
 import { ModalMapViewport } from '../ModalMapViewport';
 import { useMap } from '@/context/MapContext';
 import { PoiMarkers } from '../PoiMarkers';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Poi {
     key: string,
