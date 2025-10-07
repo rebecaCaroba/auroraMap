@@ -10,18 +10,24 @@ interface Poi {
     location: google.maps.LatLngLiteral
 }
 
+export interface ClickedPositionType {
+    lat: number,
+    lng: number
+}
+
 
 export function MapViewport() {
-    const { isOpenModal, openModalMap, getClickedPosition } = useMap()
+    const { isOpenModal, openModalMap } = useMap()
+    const [coordinates, setCoordinates] = useState<ClickedPositionType | null>(null)
 
     function handleAddZone(e: any) {
 
-        const zone = {
+        const coordinatesValue = {
             lat: e.detail.latLng.lat,
             lng: e.detail.latLng.lng
         }
 
-        getClickedPosition(zone)
+        setCoordinates(coordinatesValue)
         
         openModalMap()
     }
@@ -45,7 +51,7 @@ export function MapViewport() {
 
     return (
         <div>
-            {isOpenModal && <ModalMapViewport />}
+            {isOpenModal && <ModalMapViewport coordinates={coordinates} />}
             <App />
         </div>
     )

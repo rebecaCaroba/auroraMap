@@ -1,10 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getDatabase } from "firebase/database";
 import { 
   createUserWithEmailAndPassword, 
   getAuth, 
   onAuthStateChanged, 
-  signInWithEmailAndPassword 
+  signInWithEmailAndPassword
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -14,12 +14,14 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_storageBucket,
   messagingSenderId: process.env.NEXT_PUBLIC_messagingSenderId,
   appId: process.env.NEXT_PUBLIC_appId,
-  measurementId: process.env.NEXT_PUBLIC_measurementId
+  measurementId: process.env.NEXT_PUBLIC_measurementId,
+  databaseURL: "https://auroramap-aae9e-default-rtdb.firebaseio.com/"
 };
 
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+const db = getDatabase()
 
 export {
   app,
@@ -27,6 +29,7 @@ export {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  db,
 }
 
 

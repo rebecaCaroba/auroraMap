@@ -1,4 +1,3 @@
-
 import { app, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "../dbFirebase";
 
 export async function signIn(email: string, password: string) {
