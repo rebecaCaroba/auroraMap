@@ -43,7 +43,8 @@ export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
 
             console.log(dataReportZone)
 
-            const { response } = await setReportZone(dataReportZone)
+            await setReportZone(dataReportZone)
+
 
         } catch (err) {
             console.log(err)
