@@ -5,7 +5,8 @@ import {
   get, 
   onValue, 
   ref, 
-  set 
+  set,
+  push
 } from "firebase/database";
 import { 
   createUserWithEmailAndPassword, 
@@ -41,7 +42,8 @@ export {
   get, 
   onValue,
   ref, 
-  set
+  set,
+  push
 }
 
 

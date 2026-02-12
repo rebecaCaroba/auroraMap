@@ -14,6 +14,7 @@ export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
     const { openModalMap } = useMap()
     const { userUid } = useUser()
     const [dangerType, setDangerType] = useState<string>('')
+    const [severity, setSeverity] = useState<string>('')
     const [description, setDescription] = useState<string>('')
 
 
@@ -36,6 +37,7 @@ export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
                 lat,
                 lng,
                 dangerType,
+                severity,
                 description
             }
 
@@ -59,33 +61,20 @@ export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
                 <form onSubmit={handleAddReportZone} id="reportForm">
                     <div className="form-group">
                         <label htmlFor="dangerType">Tipo de Perigo:</label>
-                        <select name="dangerType" value={dangerType} onChange={(e) => setDangerType(e.target.value)} required>
-                            <optgroup label="🔴 Zonas de risco imediato">
-                                <option value="assalto">Assalto frequente</option>
-                                <option value="agressao">Agressão/violência física</option>
-                                <option value="assedio">Assédio sexual</option>
-                                <option value="sequestro">Tentativa de sequestro</option>
-                            </optgroup>
-
-                            <optgroup label="🟠 Zonas de vulnerabilidade">
-                                <option value="iluminacao">Iluminação precária</option>
-                                <option value="deserto">Movimento baixo à noite</option>
-                                <option value="transporte">Transporte público inseguro</option>
-                                <option value="furtos">Furtos/vandalismo</option>
-                            </optgroup>
-
-                            <optgroup label="🟡 Zonas de atenção">
-                                <option value="aglomeracao">Grande aglomeração</option>
-                                <option value="bares">Áreas de bares/vida noturna</option>
-                                <option value="eventos">Eventos temporários de risco</option>
-                            </optgroup>
-
-                            <optgroup label="🟢 Zonas de apoio">
-                                <option value="delegacia">Delegacia/Base policial</option>
-                                <option value="hospital">Hospital/UPA</option>
-                                <option value="comercio">Comércio 24h</option>
-                                <option value="apoio">Ponto de apoio comunitário</option>
-                            </optgroup>
+                        <select id="dangerType" value={dangerType} onChange={(e) => setDangerType(e.target.value)} required>
+                            <option value="">Selecione o tipo</option>
+                            <option value="Violência/Assalto">Violência/Assalto</option>
+                            <option value="Iluminação precária">Iluminação precária</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="severity">Nível de Perigo:</label>
+                        <select id="severity" value={severity} onChange={(e) => setSeverity(e.target.value)} required>
+                            <option value="">Selecione o nível</option>
+                            <option value="Alto">Alto - Perigo Iminente</option>
+                            <option value="Médio">Médio - Cuidado Necessário</option>
+                            <option value="Baixo">Baixo - Atenção</option>
                         </select>
                     </div>
                     <div className="form-group">

@@ -1,27 +1,29 @@
-import { db, ref, set } from "../dbFirebase";
+import { db, ref, push } from "../dbFirebase";
 
 interface SetReportZoneType {
     userUid: string | null
     lat: number;
     lng: number;
     dangerType: string;
+    severity: string;
     description: string;
 }
 
 export async function setReportZone(data: SetReportZoneType) {
     let response = null
+    const contentData = {
+        lat: data.lat,
+        lng: data.lng,
+        dangerType: data.dangerType,
+        sevarity: data.severity,
+        description: data.description,
+    }
 
     try {
-        response = set(ref(db, 'reportZone/' + data.userUid), {
-            lat: data.lat,
-            lng: data.lng,
-            dangerType: data.dangerType,
-            description: data.description,
-        });
-
+        const contentRef = ref(db, `reportZones`)
+        const newContentRef = await push(contentRef, contentData)
+        
     } catch (error: any) {
-        const errorCode = error.code
-
         console.error('Erro ', error.message)
     }
 
