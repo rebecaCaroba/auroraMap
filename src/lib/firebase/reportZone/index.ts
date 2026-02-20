@@ -1,6 +1,6 @@
-import { db, ref, push } from "../dbFirebase";
+import { db, ref, push, get, onValue } from "../dbFirebase";
 
-interface SetReportZoneType {
+export interface SetReportZoneType {
     userUid: string | null
     lat: number;
     lng: number;
@@ -9,11 +9,24 @@ interface SetReportZoneType {
     description: string;
 }
 
+export interface GetReportZoneType {
+    dangerType: string;
+    description: string;
+    key: string;
+    location: {
+        lat: number;
+        lng: number;
+    };
+    sevarity: string;
+}
+
 export async function setReportZone(data: SetReportZoneType) {
     let response = null
     const contentData = {
-        lat: data.lat,
-        lng: data.lng,
+        location: {
+            lat: data.lat,
+            lng: data.lng,
+        },
         dangerType: data.dangerType,
         sevarity: data.severity,
         description: data.description,

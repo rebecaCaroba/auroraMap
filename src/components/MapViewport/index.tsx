@@ -4,11 +4,8 @@ import { ModalMapViewport } from '../ModalMapViewport';
 import { useMap } from '@/context/MapContext';
 import { PoiMarkers } from '../PoiMarkers';
 import { useEffect, useState } from 'react';
-
-interface Poi {
-    key: string,
-    location: google.maps.LatLngLiteral
-}
+import { GetReportZoneType } from '@/lib/firebase/reportZone';
+import { db, ref, onValue } from "../../lib/firebase/dbFirebase";
 
 export interface ClickedPositionType {
     lat: number,
@@ -19,6 +16,25 @@ export interface ClickedPositionType {
 export function MapViewport() {
     const { isOpenModal, openModalMap } = useMap()
     const [coordinates, setCoordinates] = useState<ClickedPositionType | null>(null)
+    const [reportZone, setReportZone] = useState<GetReportZoneType[] | null>(null)
+
+    useEffect(() => {
+        const t = onValue(ref(db, 'reportZones'), (snapshot) => {
+            const data = snapshot.val();
+            if (!data) {
+                setReportZone([]);
+                return;
+            }
+            const reportZones = Object.keys(data).map(key => ({
+                key,
+                ...data[key]
+            })) as GetReportZoneType[];
+            setReportZone(reportZones);
+        });
+
+
+    }, [])
+
 
     function handleAddZone(e: any) {
 
@@ -32,7 +48,6 @@ export function MapViewport() {
         openModalMap()
     }
 
-
     const App = () => (
         <APIProvider apiKey={String(process.env.NEXT_PUBLIC_googleMapsApiKey)} onLoad={() => console.log('Maps API has loaded.')}>
             <Map onClick={(e) => handleAddZone(e)}
@@ -43,7 +58,9 @@ export function MapViewport() {
                 disableDefaultUI={true}
                 mapId={'250bc91d913d5ab2294fddba'}
             >
-                <PoiMarkers />
+                {reportZone && reportZone.map(zone => (
+                    <PoiMarkers key={zone.key} zone={zone} />
+                ))}
             </Map>
 
         </APIProvider>

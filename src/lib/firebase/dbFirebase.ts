@@ -6,7 +6,7 @@ import {
   onValue, 
   ref, 
   set,
-  push
+  push,
 } from "firebase/database";
 import { 
   createUserWithEmailAndPassword, 
