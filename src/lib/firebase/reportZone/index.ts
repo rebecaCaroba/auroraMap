@@ -17,7 +17,7 @@ export interface GetReportZoneType {
         lat: number;
         lng: number;
     };
-    sevarity: string;
+    severity: 'Alto' | 'Médio' | 'Baixo';
 }
 
 export async function setReportZone(data: SetReportZoneType) {
@@ -28,7 +28,7 @@ export async function setReportZone(data: SetReportZoneType) {
             lng: data.lng,
         },
         dangerType: data.dangerType,
-        sevarity: data.severity,
+        severity: data.severity,
         description: data.description,
     }
 

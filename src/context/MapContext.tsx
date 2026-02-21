@@ -24,8 +24,6 @@ export function useMap() {
 export function MapProvider({ children }: MapContextProviderProps) {
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
 
-    
-
     function openModalMap() {
         setIsOpenModal(!isOpenModal)
     }
