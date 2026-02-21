@@ -2,6 +2,7 @@ import { db, ref, push, get, onValue } from "../dbFirebase";
 
 export interface SetReportZoneType {
     userUid: string | null
+    userName?: string
     lat: number;
     lng: number;
     dangerType: string;
@@ -10,6 +11,7 @@ export interface SetReportZoneType {
 }
 
 export interface GetReportZoneType {
+    userName?: string
     dangerType: string;
     description: string;
     key: string;
@@ -18,11 +20,15 @@ export interface GetReportZoneType {
         lng: number;
     };
     severity: 'Alto' | 'Médio' | 'Baixo';
+    date: string
 }
 
 export async function setReportZone(data: SetReportZoneType) {
     let response = null
+
+
     const contentData = {
+        userName: data.userName == undefined ? 'Usuário Anônimo' : data.userName,
         location: {
             lat: data.lat,
             lng: data.lng,
@@ -30,6 +36,7 @@ export async function setReportZone(data: SetReportZoneType) {
         dangerType: data.dangerType,
         severity: data.severity,
         description: data.description,
+        date: new Date().toISOString().split('T')[0],
     }
 
     try {

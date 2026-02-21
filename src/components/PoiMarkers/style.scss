@@ -1,0 +1,81 @@
+@import '../../style/config/variables';
+
+.info-window {
+    min-width: 260px;
+    max-width: 320px;
+    padding: 16px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, $c-first 0%, $c-secondary 100%);
+    color: #ffffff;
+    font-family: "Segoe UI", sans-serif;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    animation: fadeIn 0.2s ease-in-out;
+  }
+  
+  .info-header {
+    margin-bottom: 10px;
+  }
+  
+  .info-username {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .info-date {
+    font-size: 13px;
+    opacity: 0.8;
+    margin: 0;
+  }
+  
+  .info-content-danger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 8px 0;
+  }
+
+  .info-danger {
+    font-size: 15px;
+  }
+  
+  .info-description {
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: justify;
+  }
+  
+  .severity-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 15px;
+
+  }
+  
+  .high {
+    background-color: #dc2626;
+    color: white;
+  }
+  
+  .medium {
+    background-color: #d4af37;
+    color: #1f2937;
+  }
+  
+  .low {
+    background-color: #facc15;
+    color: #1f2937;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

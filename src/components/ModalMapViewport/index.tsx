@@ -16,6 +16,7 @@ export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
     const [dangerType, setDangerType] = useState<string>('')
     const [severity, setSeverity] = useState<string>('')
     const [description, setDescription] = useState<string>('')
+    const [userName, setUserName] = useState<string | undefined>(undefined)
 
 
     function closeReportModal() {
@@ -38,7 +39,8 @@ export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
                 lng,
                 dangerType,
                 severity,
-                description
+                description,
+                userName
             }
 
 
@@ -83,7 +85,7 @@ export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
                     </div>
                     <div className="form-group">
                         <label htmlFor="reporterName">Seu Nome (opcional):</label>
-                        <input type="text" name="reporterName" placeholder="Nome ou apelido" />
+                        <input type="text" name="reporterName" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="Nome ou apelido" />
                     </div>
                     <div className="modal-buttons">
                         <button type="button" className="btn-cancel" onClick={closeReportModal}>Cancelar</button>
