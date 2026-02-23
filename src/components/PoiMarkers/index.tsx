@@ -7,17 +7,18 @@ import './style.scss'
 
 interface PoiMarkersProps {
     zone: GetReportZoneType
+    activeMarker: string | null
+    setActiveMarker: (key: string | null) => void
 }
 
-export function PoiMarkers({ zone }: PoiMarkersProps) {
-    const [openInfoWindow, setOpenInfoWindow] = useState<boolean>(false)
+export function PoiMarkers({ zone, setActiveMarker, activeMarker }: PoiMarkersProps) {
     const [markerRef, marker] = useMarkerRef()
 
     const handleMarkerClick = useCallback(() => {
-        setOpenInfoWindow(isOpen => !isOpen), []
-    }, [])
+        setActiveMarker(zone.key)
+    }, [zone.key, setActiveMarker])
 
-    const handleClose = useCallback(() => setOpenInfoWindow(false), [])
+    const handleClose = useCallback(() => setActiveMarker(null), [])
 
     const markerFillColor = useMarkerFillColor(zone.severity)
 
@@ -44,7 +45,7 @@ export function PoiMarkers({ zone }: PoiMarkersProps) {
                 animation={google.maps.Animation.DROP}
             />
 
-            {openInfoWindow && marker && (
+            {activeMarker == zone.key && marker && (
 
                 <InfoWindow anchor={marker} onClose={handleClose}>
                     <div className="info-window">
