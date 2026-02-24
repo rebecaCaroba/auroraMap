@@ -1,10 +1,17 @@
 'use client'
 import { signIn } from "@/lib/firebase/auth";
-import { isEmailCorrect } from "@/utils/isEmailCorrect";
-import { IsPasswordCorrect } from "@/utils/isPasswordCorrect";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from "react-hook-form";
+
+const LoginFormSchema = zod.object({
+    email: zod.string().min(1, {message: 'O email é obrigatório'}).email('Digite um email válido'),
+    password: zod.string().min(8, { message: 'A senha deve ter no mínimo 8 caracteres.' })
+})
+
+type LoginFormDataInputs = zod.infer<typeof LoginFormSchema>
 
 interface ErrorFormType {
     location: string
@@ -12,51 +19,18 @@ interface ErrorFormType {
 }
 
 export default function FormLogin() {
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
-    const [errorForm, setErrorForm] = useState<ErrorFormType | null>(null)
+    
     const router = useRouter()
 
+    const {formState: {errors}, register, handleSubmit} = useForm<LoginFormDataInputs>({   
+        resolver: zodResolver(LoginFormSchema),
+    })
 
-    async function handleLogin(e: FormEvent) {
-        e.preventDefault()
-
-        if (!email.trim() || !password.trim()) {
-            return setErrorForm({
-                location: 'empty',
-                message: 'Preecha o(s) campo(s) acima'
-            })
-        }
-
-        const isEmail = isEmailCorrect(email.trim())
-
-        if (isEmail.error == true) {
-            return setErrorForm({
-                location: "email",
-                message: isEmail.message,
-            });
-        }
-
-        const isPassword = IsPasswordCorrect(password.trim())
-
-        if (isPassword.error == true) {
-            return setErrorForm({
-                location: "password",
-                message: isPassword.message,
-            });
-        }
+    async function handleLogin(data: LoginFormDataInputs) {
+        const { email, password } = data
 
         try {
-            const { response, err } = await signIn(email, password)
-
-            
-
-            if (err) {
-                return setErrorForm({
-                    location: 'password',
-                    message: err
-                });
-            }
+            await signIn(email, password)
 
             router.push('/mapa')
         } catch (err) {
@@ -67,17 +41,20 @@ export default function FormLogin() {
     return (
         <div className='login-content'>
             <h1>Login</h1>
-            <form onSubmit={(e) => handleLogin(e)}>
+            <form onSubmit={handleSubmit(handleLogin)} className="form-login">
                 <div className="form-group">
                     <label htmlFor="email">Email:</label>
-                    <input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" id="email" {...register('email')} />
+                    <span className='form-span-message'>
+                        {errors.email ? errors.email?.message : ''}
+                    </span>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="password">Senha:</label>
-                    <input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" id="password" {...register('password')} />
                     <span className='form-span-message'>
-                        {errorForm?.location == 'password' || errorForm?.location == 'empty' ? errorForm.message : ''}
+                        {errors.password ? errors.password?.message : ''}
                     </span>
                 </div>
                 <span>

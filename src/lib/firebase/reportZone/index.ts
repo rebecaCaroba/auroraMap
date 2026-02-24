@@ -26,9 +26,8 @@ export interface GetReportZoneType {
 export async function setReportZone(data: SetReportZoneType) {
     let response = null
 
-
     const contentData = {
-        userName: data.userName == undefined ? 'Usuário Anônimo' : data.userName,
+        userName: data.userName == "" ? 'Usuário Anônimo' : data.userName,
         location: {
             lat: data.lat,
             lng: data.lng,
