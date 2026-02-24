@@ -49,13 +49,14 @@ export function PoiMarkers({ zone, setActiveMarker, activeMarker }: PoiMarkersPr
 
                 <InfoWindow anchor={marker} onClose={handleClose}>
                     <div className="info-window">
-                        <div className="info-header">
-                            <p>Reportado por: <span className="info-username"> {zone.userName}</span></p>
-                            <p className="info-date">Data: {formatDate(zone.date)}</p>
-                        </div>
+                            <h2 className="info-danger">{zone.dangerType}</h2>
+                            <p className="info-description">
+                                <strong>Descrição:</strong>
+                                <br />
+                                {zone.description}
+                            </p>
                         <div className="info-content-danger">
 
-                            <p className="info-danger"><strong>{zone.dangerType}</strong></p>
                             {zone.severity == 'Alto' && (
                                 <strong className='severity-badge high'>
                                     Severidade: {zone.severity}
@@ -72,7 +73,10 @@ export function PoiMarkers({ zone, setActiveMarker, activeMarker }: PoiMarkersPr
                                 </strong>
                             )}
                         </div>
-                        <p className="info-description"> {zone.description}</p>
+                        <div className="info-header">
+                            <p>Reportado por: <span className="info-username"> {zone.userName}</span></p>
+                            <p className="info-date">Data: {formatDate(zone.date)}</p>
+                        </div>
                     </div>
                 </InfoWindow>
             )

@@ -63,12 +63,7 @@ export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
                 <form onSubmit={handleAddReportZone} id="reportForm">
                     <div className="form-group">
                         <label htmlFor="dangerType">Tipo de Perigo:</label>
-                        <select id="dangerType" value={dangerType} onChange={(e) => setDangerType(e.target.value)} required>
-                            <option value="">Selecione o tipo</option>
-                            <option value="Violência/Assalto">Violência/Assalto</option>
-                            <option value="Iluminação precária">Iluminação precária</option>
-                            <option value="Outro">Outro</option>
-                        </select>
+                        <input type="text" name="dangerType" onChange={(e) => setDangerType(e.target.value)} required placeholder='Assaltos, violência...' />
                     </div>
                     <div className="form-group">
                         <label htmlFor="severity">Nível de Perigo:</label>
