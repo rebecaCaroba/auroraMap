@@ -17,7 +17,7 @@ interface ModalMapViewportProps {
 const newReportZoneFormSchema = zod.object({
     dangerType: zod.string().min(1, 'O tipo de perigo é obrigatório'),
     severity: zod.enum(['Alto', 'Médio', 'Baixo'], { message: 'Selecione um nível de perigo válido' }),
-    description: zod.string().min(1, 'A descrição é obrigatória').max(150, 'A descrição deve ter no máximo 150 caracteres'),
+    description: zod.string().min(1, 'A descrição é obrigatória').max(200, 'A descrição deve ter no máximo 150 caracteres'),
     userName: zod.string()
         .max(30, 'O nome deve ter no máximo 30 caracteres')
         .optional()
