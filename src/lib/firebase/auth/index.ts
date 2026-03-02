@@ -1,4 +1,4 @@
-import { app, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "../dbFirebase";
+import { app, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "../dbFirebase";
 
 export async function signIn(email: string, password: string) {
     let response = null
@@ -18,12 +18,17 @@ export async function signIn(email: string, password: string) {
     return { response, err }
 }
 
-export async function createUser(email: string, password: string) {
+export async function createUser(userName: string, email: string, password: string) {
     let response = null
     let err = null
 
     try {
         response = await createUserWithEmailAndPassword(auth, email, password)
+
+        await updateProfile(auth.currentUser!, {
+            displayName: userName
+        })
+
     } catch (error: any) {
         const errorCode = error.code;
 

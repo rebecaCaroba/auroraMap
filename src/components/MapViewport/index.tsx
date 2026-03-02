@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { GetReportZoneType } from '@/lib/firebase/reportZone';
 import { db, ref, onValue } from "../../lib/firebase/dbFirebase";
 import { useUser } from '@/context/UserContext';
+import { useRouter } from 'next/navigation';
 
 export interface ClickedPositionType {
     lat: number,
@@ -20,12 +21,13 @@ export function MapViewport() {
     const [coordinates, setCoordinates] = useState<ClickedPositionType | null>(null)
     const [reportZone, setReportZone] = useState<GetReportZoneType[] | null>(null)
     const [activeMarker, setActiveMarker] = useState<string | null>(null)
-
+    const router = useRouter()
 
     useEffect(() => {
 
         if(!userUid) {
             console.log('Usuário não autenticado. Não é possível carregar as zonas de relatório.')
+            router.push('/login')
             setReportZone(null)
             return
         }

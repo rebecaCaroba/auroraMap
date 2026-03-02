@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form';
 
 const RegisterFormSchema = zod.object({
+    userName: zod.string().min(1, { message: 'O nome é obrigatório' }),
     email: zod.string().min(1, { message: 'O email é obrigatório' }).email('Digite um email válido'),
     password: zod.string().min(8, { message: 'A senha deve ter no mínimo 8 caracteres.' }),
     confirmPassword: zod.string().min(8, { message: 'A confirmação de senha deve ter no mínimo 8 caracteres.' }),
@@ -33,10 +34,10 @@ export function FormRegister() {
 
     async function handleCreatAccount(data: RegisterFormDataInputs) {
         
-        const { email, password } = data
+        const { userName, email, password } = data
 
         try {
-            const { response, err } = await createUser(email, password)
+            const { response, err } = await createUser(userName, email, password)
 
             router.push('/mapa')
         } catch (error: any) {
@@ -47,6 +48,17 @@ export function FormRegister() {
 
     return (
         <form onSubmit={handleSubmit(handleCreatAccount)} className="form-register">
+            <div className="form-group">
+                <label htmlFor="userName">Nome:</label>
+                <input
+                    type="userName"
+                    id="userName"
+                    {...register('userName')}
+                />
+                <span className='form-span-message'>
+                    {errors.userName ? errors.userName.message : ''}
+                </span>
+            </div>
             <div className="form-group">
                 <label htmlFor="email">Email:</label>
                 <input
@@ -87,7 +99,7 @@ export function FormRegister() {
             <span>
                 Já tem uma conta?<Link href="/login"> Conecte-se</Link>
             </span>
-            <button type='submit'>Entrar</button>
+            <button type='submit'>Cadastrar</button>
         </form>
     )
 }
