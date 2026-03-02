@@ -1,5 +1,5 @@
 'use client'
-import { auth, onAuthStateChanged} from "@/lib/firebase/dbFirebase";
+import { auth, onAuthStateChanged, signOut} from "@/lib/firebase/dbFirebase";
 import { ReactNode, useContext, useState, createContext, useEffect } from "react";
 
 interface UserContextProviderProps {
@@ -22,14 +22,14 @@ export function useUser() {
 }
 
 export function UserProvider({ children }: UserContextProviderProps) {
-    const [userUid, SetUserUid] = useState<string>('')
+    const [userUid, setUserUid] = useState<string>('')
 
-    async function verifyUser() {
+    function verifyUser() {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 
                 const uid = user.uid;
-                SetUserUid(uid)
+                setUserUid(uid)
                                 console.log(' conectado')
 
             } else {
@@ -40,6 +40,15 @@ export function UserProvider({ children }: UserContextProviderProps) {
             }
         });
     }
+
+    function logout() {
+        signOut(auth).then(() => {
+            setUserUid('')
+        }).catch((error) => {
+            console.error('Erro ao sair', error);
+        })
+    }
+            
 
     useEffect(() => {
         verifyUser()

@@ -6,6 +6,7 @@ import { PoiMarkers } from '../PoiMarkers';
 import { useEffect, useState } from 'react';
 import { GetReportZoneType } from '@/lib/firebase/reportZone';
 import { db, ref, onValue } from "../../lib/firebase/dbFirebase";
+import { useUser } from '@/context/UserContext';
 
 export interface ClickedPositionType {
     lat: number,
@@ -15,11 +16,20 @@ export interface ClickedPositionType {
 
 export function MapViewport() {
     const { isOpenModal, openModalMap } = useMap()
+    const { userUid } = useUser()
     const [coordinates, setCoordinates] = useState<ClickedPositionType | null>(null)
     const [reportZone, setReportZone] = useState<GetReportZoneType[] | null>(null)
     const [activeMarker, setActiveMarker] = useState<string | null>(null)
 
+
     useEffect(() => {
+
+        if(!userUid) {
+            console.log('Usuário não autenticado. Não é possível carregar as zonas de relatório.')
+            setReportZone(null)
+            return
+        }
+
         const t = onValue(ref(db, 'reportZones'), (snapshot) => {
             const data = snapshot.val();
             if (!data) {
@@ -34,7 +44,7 @@ export function MapViewport() {
         });
 
 
-    }, [])
+    }, [userUid])
 
 
     function handleAddZone(e: any) {
@@ -53,7 +63,7 @@ export function MapViewport() {
         <div>
             {isOpenModal && <ModalMapViewport coordinates={coordinates} />}
 
-            <APIProvider apiKey={String(process.env.NEXT_PUBLIC_googleMapsApiKey)} onLoad={() => console.log('Maps API has loaded.')}>
+            <APIProvider apiKey={'AIzaSyAcl_NGzBDZUHYWLEAqEx8x6vKpt8ZtdAE'} onLoad={() => console.log('Maps API has loaded.')}>
                 <Map onClick={(e) => handleAddZone(e)}
                     style={{ width: '100vw', height: '100vh' }}
                     defaultCenter={{ lat: -23.5489, lng: -46.6389 }}
