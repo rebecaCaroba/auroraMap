@@ -1,15 +1,19 @@
 'use client'
 import { RiMenuFold4Line, RiMenuFold3Line } from "react-icons/ri";
+import { FaUserCircle } from "react-icons/fa";
+
 import Link from 'next/link';
 import logo from '../../../public/aurora-boreal.png'
 import Image from "next/image";
 import './style.scss';
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { useUser } from "@/context/UserContext";
 
 
 export function Header() {
     const [isMenuBar, setIsMenuBar] = useState<boolean>(false)
+    const { userData } = useUser()
     const router = usePathname();
     
     return (
@@ -20,7 +24,7 @@ export function Header() {
                     AuroraMap
                 </div>
                 <ul className={`header-nav-links ${isMenuBar ? 'header-is-menu-bar' : ' '}`}>
-                    {router !== '/mapa' ? (
+                    {router == '/' ? (
                         <>
                             <li><a href="#home">Início</a></li>
                             <li><a href="#home-home-features">Recursos</a></li>
@@ -32,9 +36,19 @@ export function Header() {
                             </div>
                         </>
                     ) : (
-                        <li>
-                            <Link href="/perfil" className="register-button">Perfil</Link>
-                        </li>
+                        <>
+                            
+                            <li>
+                                <Link href="/mapa" className="profile-button">
+                                    Mapa
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/perfil" className="profile-button">
+                                    <FaUserCircle size={24} />{userData?.displayName}
+                                </Link>
+                            </li>
+                        </>
                     )}
 
                 </ul>

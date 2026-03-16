@@ -67,7 +67,6 @@
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
                 margin: 0 1rem;
             }
-
         }
 
         .header-nav-links {
@@ -76,6 +75,9 @@
             list-style: none;
 
             li a {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
                 color: $c-gray-900;
                 font-weight: 500;
                 text-decoration: none;
