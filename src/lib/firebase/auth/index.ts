@@ -1,4 +1,10 @@
-import { app, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updatePassword, updateProfile } from "../dbFirebase";
+import { 
+    auth, 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword, 
+    updateProfile, 
+    sendPasswordResetEmail 
+} from "../dbFirebase";
 
 export async function signIn(email: string, password: string) {
     let response = null
@@ -60,7 +66,7 @@ export async function updateUserName(userName: string) {
     return { response, err }
 }
 
-export async function changePassword(newPassword: string) {
+export async function changePassword(email: string) {
     let response = null
     let err = null
 
@@ -70,7 +76,7 @@ export async function changePassword(newPassword: string) {
             return { response, err }
         }
 
-        response = await updatePassword(auth.currentUser, newPassword)
+        response = await sendPasswordResetEmail(auth, email)
     } catch (error: any) {
         const errorCode = error.code
 
