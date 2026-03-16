@@ -1,0 +1,86 @@
+@import '../../style/config/variables';
+
+.profile {
+    background-color: $c-gray-100;
+    margin-top: 82px;
+
+    .profile-container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+            color: $c-gray-600;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid $c-gray-150;
+        }
+
+        .profile-card {
+            background-color: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: 0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+
+            h2 {
+                margin-bottom: 1rem;
+                color: $c-gray-700;
+            }
+
+            p {
+                margin-bottom: 0.6rem;
+                color: $c-gray-600;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+
+                .form-group {
+                    margin-bottom: 1rem;
+                }
+
+                label {
+                    display: block;
+                    margin-bottom: 0.4rem;
+                }
+
+                input {
+                    width: 100%;
+                    padding: 12px;
+                    border: 2px solid $c-gray-150;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    transition: border-color 0.3s ease;
+                }
+
+                button {
+                    margin-top: 1rem;
+                    background: linear-gradient(45deg, $c-first, $c-secondary);
+                    color: white;
+                    padding: 12px 24px;
+                    border: none;
+                    border-radius: 25px;
+                    text-decoration: none;
+                    font-weight: 600;
+                }
+
+                .profile-feedback {
+                    margin-top: 0.2rem;
+                    font-weight: 500;
+
+                    &.success {
+                        color: $c-green-100;
+                    }
+
+                    &.error {
+                        color: $c-red-100;
+                    }
+                }
+            }
+        }
+    }
+}

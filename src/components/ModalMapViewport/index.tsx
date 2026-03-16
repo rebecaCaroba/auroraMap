@@ -27,7 +27,7 @@ type NewReportZoneFormDataInputs = zod.infer<typeof newReportZoneFormSchema>
 
 export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
     const { openModalMap } = useMap()
-    const { userUid } = useUser()
+    const { userData } = useUser()
 
     const { register, handleSubmit, formState: { errors } } = useForm<NewReportZoneFormDataInputs>({
         resolver: zodResolver(newReportZoneFormSchema),
@@ -53,6 +53,7 @@ export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
 
         try {
             const { lat, lng } = coordinates
+            const userUid = userData?.uid
 
             const dataReportZone = {
                 userUid,

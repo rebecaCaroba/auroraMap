@@ -33,7 +33,7 @@ export function Header() {
                         </>
                     ) : (
                         <li>
-                            <Link href="/" className="register-button">Home</Link>
+                            <Link href="/perfil" className="register-button">Perfil</Link>
                         </li>
                     )}
 

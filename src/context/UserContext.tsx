@@ -1,15 +1,18 @@
 'use client'
 import { auth, onAuthStateChanged, signOut} from "@/lib/firebase/dbFirebase";
 import { ReactNode, useContext, useState, createContext, useEffect } from "react";
+import { User } from "@/lib/firebase/dbFirebase";
 
 interface UserContextProviderProps {
     children: ReactNode
 }
 
 interface UserContextType {
-    userUid: string | null
-    verifyUser: () => void
+    userData: User | null
+    setUserData: (user: User | null) => void
+    logout: () => void
 }
+
 
 export const UserContext = createContext({} as UserContextType);
 
@@ -22,42 +25,21 @@ export function useUser() {
 }
 
 export function UserProvider({ children }: UserContextProviderProps) {
-    const [userUid, setUserUid] = useState<string>('')
-
-    function verifyUser() {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                
-                const uid = user.uid;
-                setUserUid(uid)
-                                console.log(' conectado')
-
-            } else {
-                // User is signed out
-                // ...
-                console.log('não conectado')
-
-            }
-        });
-    }
-
+    const [userData, setUserData] = useState<User | null>(null)
     function logout() {
         signOut(auth).then(() => {
-            setUserUid('')
+            setUserData(null)
         }).catch((error) => {
             console.error('Erro ao sair', error);
         })
     }
             
 
-    useEffect(() => {
-        verifyUser()
-    }, [])
-
     return (
         <UserContext.Provider value={{
-            userUid,
-            verifyUser
+            userData,
+            logout,
+            setUserData
         }}>
             {children}
         </UserContext.Provider>

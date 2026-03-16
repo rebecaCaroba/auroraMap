@@ -8,6 +8,7 @@ import { GetReportZoneType } from '@/lib/firebase/reportZone';
 import { db, ref, onValue } from "../../lib/firebase/dbFirebase";
 import { useUser } from '@/context/UserContext';
 import { useRouter } from 'next/navigation';
+import { auth, onAuthStateChanged, signOut } from "@/lib/firebase/dbFirebase";
 
 export interface ClickedPositionType {
     lat: number,
@@ -17,36 +18,35 @@ export interface ClickedPositionType {
 
 export function MapViewport() {
     const { isOpenModal, openModalMap } = useMap()
-    const { userUid } = useUser()
+    const { setUserData } = useUser()
     const [coordinates, setCoordinates] = useState<ClickedPositionType | null>(null)
     const [reportZone, setReportZone] = useState<GetReportZoneType[] | null>(null)
     const [activeMarker, setActiveMarker] = useState<string | null>(null)
     const router = useRouter()
 
     useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+        if (user) {
+            setUserData(user)
+            const t = onValue(ref(db, 'reportZones'), (snapshot) => {
+                const data = snapshot.val();
+                if (!data) {
+                    setReportZone([]);
+                    return;
+                }
+                const reportZones = Object.keys(data).map(key => ({
+                    key,
+                    ...data[key]
+                })) as GetReportZoneType[];
+                setReportZone(reportZones);
+            });
 
-        if(!userUid) {
-            console.log('Usuário não autenticado. Não é possível carregar as zonas de relatório.')
+        } else {
+
             router.push('/login')
-            setReportZone(null)
-            return
         }
-
-        const t = onValue(ref(db, 'reportZones'), (snapshot) => {
-            const data = snapshot.val();
-            if (!data) {
-                setReportZone([]);
-                return;
-            }
-            const reportZones = Object.keys(data).map(key => ({
-                key,
-                ...data[key]
-            })) as GetReportZoneType[];
-            setReportZone(reportZones);
         });
-
-
-    }, [userUid])
+     }, [])
 
 
     function handleAddZone(e: any) {
@@ -57,7 +57,7 @@ export function MapViewport() {
         }
 
         setCoordinates(coordinatesValue)
-        
+
         openModalMap()
     }
 
@@ -75,12 +75,12 @@ export function MapViewport() {
                     mapId={'250bc91d913d5ab2294fddba'}
                 >
                     {reportZone && reportZone.map(zone => (
-                        <PoiMarkers 
-                        key={zone.key} 
-                        zone={zone}
-                        activeMarker={activeMarker}
-                        setActiveMarker={setActiveMarker}
-                        
+                        <PoiMarkers
+                            key={zone.key}
+                            zone={zone}
+                            activeMarker={activeMarker}
+                            setActiveMarker={setActiveMarker}
+
                         />
                     ))}
                 </Map>

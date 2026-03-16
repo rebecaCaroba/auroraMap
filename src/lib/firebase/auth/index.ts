@@ -1,4 +1,4 @@
-import { app, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "../dbFirebase";
+import { app, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updatePassword, updateProfile } from "../dbFirebase";
 
 export async function signIn(email: string, password: string) {
     let response = null
@@ -38,6 +38,51 @@ export async function createUser(userName: string, email: string, password: stri
             console.error("Erro ao registrar o usuário:", error.message);
         }
     }
+    return { response, err }
+}
+
+export async function updateUserName(userName: string) {
+    let response = null
+    let err = null
+
+    try {
+        if (!auth.currentUser) {
+            err = 'Usuário não autenticado'
+            return { response, err }
+        }
+
+        response = await updateProfile(auth.currentUser, { displayName: userName })
+    } catch (error: any) {
+        err = 'Não foi possível atualizar o nome'
+        console.error('Erro ao atualizar nome', error.message)
+    }
+
+    return { response, err }
+}
+
+export async function changePassword(newPassword: string) {
+    let response = null
+    let err = null
+
+    try {
+        if (!auth.currentUser) {
+            err = 'Usuário não autenticado'
+            return { response, err }
+        }
+
+        response = await updatePassword(auth.currentUser, newPassword)
+    } catch (error: any) {
+        const errorCode = error.code
+
+        if (errorCode === 'auth/requires-recent-login') {
+            err = 'Para alterar a senha, faça login novamente.'
+        } else {
+            err = 'Não foi possível alterar a senha'
+        }
+
+        console.error('Erro ao alterar senha', error.message)
+    }
+
     return { response, err }
 }
 

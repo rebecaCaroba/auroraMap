@@ -15,6 +15,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  updatePassword,
+  User
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -48,6 +50,8 @@ export {
   push,
   signOut,
   updateProfile,
+  updatePassword,
+  
 }
 
-
+export type { User }
