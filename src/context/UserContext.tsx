@@ -1,5 +1,5 @@
 'use client'
-import { auth, onAuthStateChanged, signOut} from "@/lib/firebase/dbFirebase";
+import { auth, signOut, onAuthStateChanged} from "@/lib/firebase/dbFirebase";
 import { ReactNode, useContext, useState, createContext, useEffect } from "react";
 import { User } from "@/lib/firebase/dbFirebase";
 
@@ -33,6 +33,18 @@ export function UserProvider({ children }: UserContextProviderProps) {
             console.error('Erro ao sair', error);
         })
     }
+    
+    useEffect(() => {
+        const unsub = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserData(user)
+            } else {
+                setUserData(null)
+            }   
+        });
+
+        return () => unsub()
+    }, [])
             
 
     return (

@@ -27,8 +27,7 @@ export function MapViewport() {
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
         if (user) {
-            setUserData(user)
-            const t = onValue(ref(db, 'reportZones'), (snapshot) => {
+                onValue(ref(db, 'reportZones'), (snapshot) => {
                 const data = snapshot.val();
                 if (!data) {
                     setReportZone([]);
