@@ -13,7 +13,6 @@ interface UserContextType {
     logout: () => void
 }
 
-
 export const UserContext = createContext({} as UserContextType);
 
 export function useUser() {

@@ -32,7 +32,7 @@ export async function createUser(userName: string, email: string, password: stri
         response = await createUserWithEmailAndPassword(auth, email, password)
 
         await updateProfile(auth.currentUser!, {
-            displayName: userName
+            displayName: userName, 
         })
 
     } catch (error: any) {

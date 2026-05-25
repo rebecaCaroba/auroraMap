@@ -58,8 +58,21 @@
 
                 .form-group {
                     margin-bottom: 1rem;
+
                 }
 
+                .checkbox {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    justify-content: space-between;
+
+                    input {
+                        width: auto;
+                    }
+                    
+                }
+                
                 label {
                     display: block;
                     margin-bottom: 0.4rem;

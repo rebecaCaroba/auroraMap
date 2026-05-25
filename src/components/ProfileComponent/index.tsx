@@ -85,13 +85,20 @@ export function ProfileComponent() {
                     <form onSubmit={handleSubmitName(handleUpdateName)}>
                         <div className='form-group'>
                             <label htmlFor='userName'>Novo nome:</label>
-                            <input id='userName' type='text' {...registerName('userName')} value={userData?.displayName ? userData.displayName : undefined} />
+                            <input id='userName' type='text' {...registerName('userName')} value={userData?.displayName ? userData.displayName : ''} />
                             <span className='form-span-message'>
                                 {nameErrors.userName ? nameErrors.userName.message : ''}
                             </span>
                         </div>
 
+                        <div className='form-group checkbox'>
+                            <label htmlFor="showName">Exibir o nome nas zonas reportadas</label>
+                            <input id="showName" type="checkbox" />
+                        </div>
+
                         <button type='submit'>Alterar nome</button>
+
+
                     </form>
                 </div>
 
