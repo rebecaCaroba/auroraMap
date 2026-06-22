@@ -33,13 +33,12 @@ export function FormRegister() {
     })
 
     async function handleCreatAccount(data: RegisterFormDataInputs) {
-        
+
         const { userName, email, password } = data
 
         try {
-            const { response, err } = await createUser(userName, email, password)
+            await createUser(userName, email, password)
 
-            router.push('/mapa')
         } catch (error: any) {
             console.log(error)
         }

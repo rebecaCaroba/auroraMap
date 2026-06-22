@@ -5,6 +5,7 @@ import {
     updateProfile, 
     sendPasswordResetEmail 
 } from "../dbFirebase";
+import { api } from "@/lib/axios";
 
 export async function signIn(email: string, password: string) {
     let response = null
@@ -29,21 +30,21 @@ export async function createUser(userName: string, email: string, password: stri
     let err = null
 
     try {
-        response = await createUserWithEmailAndPassword(auth, email, password)
+        response = await api.post('/auth/cadastro', { userName, email, password })        
 
-        await updateProfile(auth.currentUser!, {
-            displayName: userName, 
-        })
+        console.log(response)
 
     } catch (error: any) {
         const errorCode = error.code;
 
+        console.log(error)
         if (errorCode === 'auth/email-already-in-use') {
             err = 'Email já utilizado'
         } else {
-            console.error("Erro ao registrar o usuário:", error.message);
+            console.error("Erro ao registrar o usuário:", error);
         }
     }
+
     return { response, err }
 }
 
