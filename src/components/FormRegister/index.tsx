@@ -39,6 +39,8 @@ export function FormRegister() {
         try {
             await createUser(userName, email, password)
 
+            router.push('/login')
+
         } catch (error: any) {
             console.log(error)
         }

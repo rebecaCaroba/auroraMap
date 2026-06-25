@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from "react-hook-form";
+import { api } from "@/lib/axios";
 
 const LoginFormSchema = zod.object({
     email: zod.string().min(1, {message: 'O email é obrigatório'}).email('Digite um email válido'),
@@ -30,7 +31,11 @@ export default function FormLogin() {
         const { email, password } = data
 
         try {
-            await signIn(email, password)
+            const { response } = await signIn(email, password)
+
+            const token = await response?.user.getIdToken()            
+            
+            await api.post('/auth/login', { token })
 
             router.push('/mapa')
         } catch (err) {
