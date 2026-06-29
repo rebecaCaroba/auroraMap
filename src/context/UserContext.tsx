@@ -33,19 +33,6 @@ export function UserProvider({ children }: UserContextProviderProps) {
         })
     }
     
-    useEffect(() => {
-        const unsub = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUserData(user)
-            } else {
-                setUserData(null)
-            }   
-        });
-
-        return () => unsub()
-    }, [])
-            
-
     return (
         <UserContext.Provider value={{
             userData,

@@ -7,8 +7,9 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as zod from 'zod'
-import './style.scss'
 import { useUser } from '@/context/UserContext'
+import { User } from '@/types'
+import './style.scss'
 
 const updateNameSchema = zod.object({
     userName: zod.string().min(1, { message: 'O nome é obrigatório' }),
@@ -16,9 +17,9 @@ const updateNameSchema = zod.object({
 
 type UpdateNameInputs = zod.infer<typeof updateNameSchema>
 
-export function ProfileComponent() {
+export function ProfileComponent({user}: {user: User}) {
     const router = useRouter()
-    const { logout, userData } = useUser()
+    const { logout } = useUser()
 
     const {
         register: registerName,
@@ -29,14 +30,6 @@ export function ProfileComponent() {
         resolver: zodResolver(updateNameSchema),
     })
 
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                router.push('/login')
-                return
-            }
-        })
-    }, [])
 
     async function handleUpdateName(data: UpdateNameInputs) {
         await updateUserName(data.userName)
@@ -47,12 +40,12 @@ export function ProfileComponent() {
     async function handleChangePassword() {
         try {
 
-            if(!userData?.email) {
+            if(!user?.email) {
                 alert('Email do usuário não encontrado. Tente novamente mais tarde.')
                 return
             }
 
-            await changePassword(userData.email)
+            await changePassword(user.email)
 
             
         } catch (error) {
@@ -76,8 +69,7 @@ export function ProfileComponent() {
                 <div className='profile-card'>
                     <h2>Informações</h2>
 
-                    <p><strong>Email:</strong> {userData?.email}</p>
-                    <p><strong>Data de criação:</strong> {userData?.metadata.creationTime}</p>
+                    <p><strong>Email:</strong> {user?.email}</p>
                 </div>
 
                 <div className='profile-card'>
@@ -85,7 +77,7 @@ export function ProfileComponent() {
                     <form onSubmit={handleSubmitName(handleUpdateName)}>
                         <div className='form-group'>
                             <label htmlFor='userName'>Novo nome:</label>
-                            <input id='userName' type='text' {...registerName('userName')} value={userData?.displayName ? userData.displayName : ''} />
+                            <input id='userName' type='text' {...registerName('userName')} value={user?.displayName ? user.displayName : ''} />
                             <span className='form-span-message'>
                                 {nameErrors.userName ? nameErrors.userName.message : ''}
                             </span>

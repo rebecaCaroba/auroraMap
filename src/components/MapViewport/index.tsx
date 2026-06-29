@@ -9,6 +9,7 @@ import { db, ref, onValue } from "../../lib/firebase/dbFirebase";
 import { useUser } from '@/context/UserContext';
 import { useRouter } from 'next/navigation';
 import { auth, onAuthStateChanged, signOut } from "@/lib/firebase/dbFirebase";
+import { User } from '@/types';
 
 export interface ClickedPositionType {
     lat: number,
@@ -16,34 +17,24 @@ export interface ClickedPositionType {
 }
 
 
-export function MapViewport() {
+export function MapViewport({user}: {user: User}) {
     const { isOpenModal, openModalMap } = useMap()
-    const { setUserData } = useUser()
     const [coordinates, setCoordinates] = useState<ClickedPositionType | null>(null)
     const [reportZone, setReportZone] = useState<GetReportZoneType[] | null>(null)
     const [activeMarker, setActiveMarker] = useState<string | null>(null)
-    const router = useRouter()
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-        if (user) {
-                onValue(ref(db, 'reportZones'), (snapshot) => {
-                const data = snapshot.val();
-                if (!data) {
-                    setReportZone([]);
-                    return;
-                }
-                const reportZones = Object.keys(data).map(key => ({
-                    key,
-                    ...data[key]
-                })) as GetReportZoneType[];
-                setReportZone(reportZones);
-            });
-
-        } else {
-
-            router.push('/login')
-        }
+        onValue(ref(db, 'reportZones'), (snapshot) => {
+            const data = snapshot.val();
+            if (!data) {
+                setReportZone([]);
+                return;
+            }
+            const reportZones = Object.keys(data).map(key => ({
+                key,
+                ...data[key]
+            })) as GetReportZoneType[];
+            setReportZone(reportZones);
         });
      }, [])
 

@@ -5,13 +5,14 @@ import { FaUserCircle } from "react-icons/fa";
 import Link from 'next/link';
 import logo from '../../../public/aurora-boreal.png'
 import Image from "next/image";
-import './style.scss';
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { useUser } from "@/context/UserContext";
+import { User } from "@/types";
+import "./style.scss";
 
 
-export function Header() {
+export function Header({user}: {user: User}) {
     const [isMenuBar, setIsMenuBar] = useState<boolean>(false)
     const { userData } = useUser()
     const router = usePathname();
