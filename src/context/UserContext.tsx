@@ -1,7 +1,7 @@
 'use client'
-import { auth, signOut, onAuthStateChanged} from "@/lib/firebase/dbFirebase";
-import { ReactNode, useContext, useState, createContext, useEffect } from "react";
+import { ReactNode, useContext, useState, createContext } from "react";
 import { User } from "@/lib/firebase/dbFirebase";
+import { api } from "@/lib/axios";
 
 interface UserContextProviderProps {
     children: ReactNode
@@ -25,14 +25,17 @@ export function useUser() {
 
 export function UserProvider({ children }: UserContextProviderProps) {
     const [userData, setUserData] = useState<User | null>(null)
-    function logout() {
-        signOut(auth).then(() => {
-            setUserData(null)
-        }).catch((error) => {
-            console.error('Erro ao sair', error);
-        })
+
+    async function logout() {
+
+        try {
+            await api.post('/auth/logout')
+        } catch (error) {
+            console.error('Erro ao fazer logout:', error)
+        }
+
     }
-    
+
     return (
         <UserContext.Provider value={{
             userData,
