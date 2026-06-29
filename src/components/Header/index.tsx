@@ -1,20 +1,17 @@
 'use client'
 import { RiMenuFold4Line, RiMenuFold3Line } from "react-icons/ri";
 import { FaUserCircle } from "react-icons/fa";
-
 import Link from 'next/link';
 import logo from '../../../public/aurora-boreal.png'
 import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { useUser } from "@/context/UserContext";
 import { User } from "@/types";
 import "./style.scss";
 
 
 export function Header({user}: {user: User}) {
     const [isMenuBar, setIsMenuBar] = useState<boolean>(false)
-    const { userData } = useUser()
     const router = usePathname();
     
     return (
@@ -46,7 +43,7 @@ export function Header({user}: {user: User}) {
                             </li>
                             <li>
                                 <Link href="/perfil" className="profile-button">
-                                    <FaUserCircle size={24} />{userData?.displayName}
+                                    <FaUserCircle size={24} />{user?.displayName}
                                 </Link>
                             </li>
                         </>
