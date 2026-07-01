@@ -4,30 +4,28 @@ import { FormEvent, useState } from 'react'
 import './style.scss'
 import { ClickedPositionType } from '../MapViewport'
 import { setReportZone } from '@/lib/firebase/reportZone'
-import { useUser } from '@/context/UserContext'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { User } from '@/types'
 
 
 interface ModalMapViewportProps {
     coordinates: ClickedPositionType | null
+    user: User
 }
 
 const newReportZoneFormSchema = zod.object({
     dangerType: zod.string().min(1, 'O tipo de perigo é obrigatório'),
     severity: zod.enum(['Alto', 'Médio', 'Baixo'], { message: 'Selecione um nível de perigo válido' }),
     description: zod.string().min(1, 'A descrição é obrigatória').max(200, 'A descrição deve ter no máximo 150 caracteres'),
-    userName: zod.string()
-        .max(30, 'O nome deve ter no máximo 30 caracteres')
-        .optional()
+    userName: zod.boolean().optional()
 })
 
 type NewReportZoneFormDataInputs = zod.infer<typeof newReportZoneFormSchema>
 
-export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
+export function ModalMapViewport({ coordinates, user }: ModalMapViewportProps) {
     const { openModalMap } = useMap()
-    const { userData } = useUser()
 
     const { register, handleSubmit, formState: { errors } } = useForm<NewReportZoneFormDataInputs>({
         resolver: zodResolver(newReportZoneFormSchema),
@@ -37,8 +35,7 @@ export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
         openModalMap()
     }
 
-    async function handleAddReportZone(data: NewReportZoneFormDataInputs) {
-        console.log('Dados do formulário:', data)
+    async function handleAddReportZone(data: NewReportZoneFormDataInputs) { 
 
         const {
             dangerType,
@@ -53,11 +50,11 @@ export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
 
         try {
             const { lat, lng } = coordinates
-            const userUid = userData?.uid
+            const userUid = user?.uid
 
             const dataReportZone = {
                 userUid,
-                userName,
+                userName: userName ? user.displayName : 'Anônimo',
                 lat,
                 lng,
                 dangerType,
@@ -109,13 +106,19 @@ export function ModalMapViewport({ coordinates }: ModalMapViewportProps) {
                             {errors.description ? errors.description.message : ''}
                         </span>
                     </div>
+
                     <div className="form-group">
-                        <label htmlFor="reporterName">Seu Nome (opcional):</label>
-                        <input type="text"  {...register('userName')} placeholder="Nome ou apelido" />
+                        <div className="checkbox-group">
+                            <label htmlFor="reporterName">
+                                Exibir nome na zona reportada:
+                            </label>
+                            <input type="checkbox" id="anonymous" {...register('userName')} defaultChecked />
+                        </div>
                         <span className='form-span-message'>
                             {errors.userName ? errors.userName.message : ''}
                         </span>
                     </div>
+
                     <div className="modal-buttons">
                         <button type="button" className="btn-cancel" onClick={closeReportModal}>Cancelar</button>
                         <button type="submit" className="btn-submit">Enviar Reporte</button>

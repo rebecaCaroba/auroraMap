@@ -81,14 +81,7 @@ export function ProfileComponent({user}: {user: User}) {
                             </span>
                         </div>
 
-                        <div className='form-group checkbox'>
-                            <label htmlFor="showName">Exibir o nome nas zonas reportadas</label>
-                            <input id="showName" type="checkbox" />
-                        </div>
-
                         <button type='submit'>Alterar nome</button>
-
-
                     </form>
                 </div>
 

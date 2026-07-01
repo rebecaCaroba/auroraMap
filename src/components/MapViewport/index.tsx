@@ -6,9 +6,6 @@ import { PoiMarkers } from '../PoiMarkers';
 import { useEffect, useState } from 'react';
 import { GetReportZoneType } from '@/lib/firebase/reportZone';
 import { db, ref, onValue } from "../../lib/firebase/dbFirebase";
-import { useUser } from '@/context/UserContext';
-import { useRouter } from 'next/navigation';
-import { auth, onAuthStateChanged, signOut } from "@/lib/firebase/dbFirebase";
 import { User } from '@/types';
 
 export interface ClickedPositionType {
@@ -53,7 +50,7 @@ export function MapViewport({user}: {user: User}) {
 
     return (
         <div>
-            {isOpenModal && <ModalMapViewport coordinates={coordinates} />}
+            {isOpenModal && <ModalMapViewport coordinates={coordinates} user={user} />}
 
             <APIProvider apiKey={'AIzaSyAcl_NGzBDZUHYWLEAqEx8x6vKpt8ZtdAE'} onLoad={() => console.log('Maps API has loaded.')}>
                 <Map onClick={(e) => handleAddZone(e)}
