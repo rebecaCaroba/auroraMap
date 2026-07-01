@@ -14,10 +14,8 @@ export async function POST(request: Request) {
             disabled: false,
         })
 
-        // await authAdmin.setCustomUserClaims(userRecord.uid, { role: 'user' })
-
-        return NextResponse.json({ message: "Cadastro:", uid: userRecord.uid }, { status: 200 })
+        return NextResponse.json({ uid: userRecord.uid }, { status: 200 })
     } catch (error) {
-        return NextResponse.json({ message: "Erro: ", error  }, { status: 500 })
+        return NextResponse.json({ error  }, { status: 500 })
     }
 }

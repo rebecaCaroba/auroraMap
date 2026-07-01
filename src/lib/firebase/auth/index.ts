@@ -6,7 +6,6 @@ import {
     sendPasswordResetEmail 
 } from "../dbFirebase";
 import { api } from "@/lib/axios";
-import { authAdmin } from "../firebase-admin";
 
 export async function signIn(email: string, password: string) {
     let response = null
@@ -31,17 +30,15 @@ export async function createUser(userName: string, email: string, password: stri
     let err = null
 
     try {
-        response = await api.post('/auth/cadastro', { userName, email, password })        
-
-        console.log(response)
+        response = await api.post('/auth/cadastro', { userName, email, password })     
 
     } catch (error: any) {
-        const errorCode = error.code;
+        const errorCode = error.response?.data.error.code
 
-        console.log(error)
-        if (errorCode === 'auth/email-already-in-use') {
-            err = 'Email já utilizado'
+        if (errorCode == 'auth/email-already-exists') {
+            err = 'Email já utilizado por outro usuário.'
         } else {
+            err = 'Erro ao registrar o usuário. Tente novamente.'
             console.error("Erro ao registrar o usuário:", error);
         }
     }

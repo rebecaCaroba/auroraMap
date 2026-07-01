@@ -12,7 +12,7 @@ const RegisterFormSchema = zod.object({
     email: zod.string().min(1, { message: 'O email é obrigatório' }).email('Digite um email válido'),
     password: zod.string().min(8, { message: 'A senha deve ter no mínimo 8 caracteres.' }),
     confirmPassword: zod.string().min(8, { message: 'A confirmação de senha deve ter no mínimo 8 caracteres.' }),
-    })
+})
     .refine((data) => data.password === data.confirmPassword, {
         message: 'As senhas não coincidem.',
         path: ['confirmPassword'],
@@ -22,22 +22,28 @@ const RegisterFormSchema = zod.object({
 type RegisterFormDataInputs = zod.infer<typeof RegisterFormSchema>
 
 interface ErrorFormType {
-    location: string
     message: string
 }
 
 export function FormRegister() {
     const router = useRouter()
-    const { handleSubmit, formState: {errors}, register } = useForm<RegisterFormDataInputs>({
+    const { handleSubmit, formState: { errors }, register } = useForm<RegisterFormDataInputs>({
         resolver: zodResolver(RegisterFormSchema),
     })
+
+    const [errorForm, setErrorForm] = useState<ErrorFormType | null>(null)
 
     async function handleCreatAccount(data: RegisterFormDataInputs) {
 
         const { userName, email, password } = data
 
         try {
-            await createUser(userName, email, password)
+            const { response, err } = await createUser(userName, email, password)
+
+            if (err) {
+                setErrorForm({ message: err })
+                return
+            }
 
             router.push('/login')
 
@@ -96,6 +102,10 @@ export function FormRegister() {
                     {errors.confirmPassword ? errors.confirmPassword.message : ''}
                 </span>
             </div>
+
+            <span className='form-span-message'>
+                {errorForm ? errorForm.message : ''}
+            </span>
 
             <span>
                 Já tem uma conta?<Link href="/login"> Conecte-se</Link>
