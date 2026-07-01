@@ -9,10 +9,9 @@ import { usePathname } from "next/navigation";
 import { User } from "@/types";
 import "./style.scss";
 
-
-export function Header({user}: {user: User}) {
+export function Header({user}: {user?: User}) {
     const [isMenuBar, setIsMenuBar] = useState<boolean>(false)
-    const router = usePathname();
+    const router = usePathname(); 
     
     return (
         <header className='header'>
@@ -43,7 +42,7 @@ export function Header({user}: {user: User}) {
                             </li>
                             <li>
                                 <Link href="/perfil" className="profile-button">
-                                    <FaUserCircle size={24} />{user?.displayName}
+                                    <FaUserCircle size={24} /> <span id="header-username" >{user?.displayName ? user.displayName : ' '}</span>
                                 </Link>
                             </li>
                         </>

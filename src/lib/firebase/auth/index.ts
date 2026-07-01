@@ -6,6 +6,7 @@ import {
     sendPasswordResetEmail 
 } from "../dbFirebase";
 import { api } from "@/lib/axios";
+import { authAdmin } from "../firebase-admin";
 
 export async function signIn(email: string, password: string) {
     let response = null
@@ -52,17 +53,24 @@ export async function updateUserName(userName: string) {
     let response = null
     let err = null
 
-    try {
-        if (!auth.currentUser) {
-            err = 'Usuário não autenticado'
-            return { response, err }
-        }
+    if (!auth.currentUser) {
+        err = 'Usuário não autenticado'
+        return { response, err }
+    }
 
-        response = await updateProfile(auth.currentUser, { displayName: userName })
-    } catch (error: any) {
+    await updateProfile(auth.currentUser, { displayName: userName }).then(() => {
+        const headerUsername = document.getElementById('header-username');
+
+        if(headerUsername) {
+            headerUsername.textContent = userName
+
+            response = userName
+        }
+        
+    }).catch((error) => {
         err = 'Não foi possível atualizar o nome'
         console.error('Erro ao atualizar nome', error.message)
-    }
+    })
 
     return { response, err }
 }

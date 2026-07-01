@@ -25,16 +25,14 @@ export function ProfileComponent({user}: {user: User}) {
         register: registerName,
         handleSubmit: handleSubmitName,
         reset,
+        setValue,
         formState: { errors: nameErrors },
     } = useForm<UpdateNameInputs>({
         resolver: zodResolver(updateNameSchema),
     })
 
-
     async function handleUpdateName(data: UpdateNameInputs) {
         await updateUserName(data.userName)
-
-        reset()
     }
 
     async function handleChangePassword() {
@@ -77,7 +75,7 @@ export function ProfileComponent({user}: {user: User}) {
                     <form onSubmit={handleSubmitName(handleUpdateName)}>
                         <div className='form-group'>
                             <label htmlFor='userName'>Novo nome:</label>
-                            <input id='userName' type='text' {...registerName('userName')} value={user?.displayName ? user.displayName : ''} />
+                            <input id='userName' type='text' {...registerName('userName')} placeholder={"Digite seu nome"} />
                             <span className='form-span-message'>
                                 {nameErrors.userName ? nameErrors.userName.message : ''}
                             </span>
