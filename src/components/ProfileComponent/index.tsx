@@ -87,15 +87,16 @@ export function ProfileComponent({user}: {user: User}) {
                 </div>
 
                 <div className='profile-card'>
+                    <UserReportZones user={user} />
+                </div>
+            
+                <div className='profile-card'>
                     <div className='profile-card-config'>
                         <button onClick={handleChangePassword}>Alterar senha</button>
                         <button onClick={handelLogout}>Sair</button>
                     </div>
                 </div>
 
-                <div className='profile-card'>
-                    <UserReportZones user={user} />
-                </div>
             </section>
         </main>
     )

@@ -115,7 +115,7 @@ export function UserReportZones({ user }: { user: User }) {
             {userReportZonesUser && userReportZonesUser.length > 0 ? (
                 <ul>
                     {userReportZonesUser.map((zone, index) => (
-                        <li key={zone.key}>
+                        <li key={index}>
                             {editingZoneKey === zone.key ? (
                                 <form
                                     className="report-zone-form"
