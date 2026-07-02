@@ -28,6 +28,6 @@ export async function POST(request: Request) {
         return res
 
     } catch (error) {
-        return NextResponse.json({ message: "Erro ao criar sessão", error }, { status: 500 })
+        return NextResponse.json({ message: "Erro ao fazer login", error }, { status: 500 })
     }
 }
