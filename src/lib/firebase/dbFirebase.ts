@@ -6,6 +6,8 @@ import {
   onValue, 
   ref, 
   set,
+  update,
+  remove,
   push,
 } from "firebase/database";
 import { 
@@ -48,6 +50,8 @@ export {
   onValue,
   ref, 
   set,
+  update,
+  remove,
   push,
   signOut,
   updateProfile,

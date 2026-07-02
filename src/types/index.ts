@@ -14,6 +14,14 @@ export interface AddReportZoneType {
     description: string;
 }
 
+export interface EditReportZoneType {
+    userUid: string;
+    key: string;
+    dangerType: string;
+    severity: string;
+    description: string;
+}
+
 export interface GetReportZoneType {
     userUid: string | null
     userName?: string
