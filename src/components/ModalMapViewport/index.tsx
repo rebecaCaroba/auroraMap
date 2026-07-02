@@ -3,7 +3,7 @@ import { useMap } from '@/context/MapContext'
 import { FormEvent, useState } from 'react'
 import './style.scss'
 import { ClickedPositionType } from '../MapViewport'
-import { setReportZone } from '@/lib/firebase/reportZone'
+import { addReportZone } from '@/lib/firebase/reportZone'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -54,7 +54,7 @@ export function ModalMapViewport({ coordinates, user }: ModalMapViewportProps) {
 
             const dataReportZone = {
                 userUid,
-                userName: userName ? user.displayName : 'Anônimo',
+                userName: userName ? "Anônimo" : user.displayName,
                 lat,
                 lng,
                 dangerType,
@@ -62,8 +62,7 @@ export function ModalMapViewport({ coordinates, user }: ModalMapViewportProps) {
                 description,
             }
 
-
-            await setReportZone(dataReportZone)
+            await addReportZone(dataReportZone)
 
             openModalMap()
         } catch (err) {
@@ -110,7 +109,7 @@ export function ModalMapViewport({ coordinates, user }: ModalMapViewportProps) {
                     <div className="form-group">
                         <div className="checkbox-group">
                             <label htmlFor="reporterName">
-                                Exibir nome na zona reportada:
+                                Denunciar como anônimo
                             </label>
                             <input type="checkbox" id="anonymous" {...register('userName')} defaultChecked />
                         </div>

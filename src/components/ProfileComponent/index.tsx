@@ -10,6 +10,7 @@ import * as zod from 'zod'
 import { useUser } from '@/context/UserContext'
 import { User } from '@/types'
 import './style.scss'
+import { UserReportZones } from '../UserReportZones'
 
 const updateNameSchema = zod.object({
     userName: zod.string().min(1, { message: 'O nome é obrigatório' }),
@@ -90,6 +91,10 @@ export function ProfileComponent({user}: {user: User}) {
                         <button onClick={handleChangePassword}>Alterar senha</button>
                         <button onClick={handelLogout}>Sair</button>
                     </div>
+                </div>
+
+                <div className='profile-card'>
+                    <UserReportZones user={user} />
                 </div>
             </section>
         </main>

@@ -4,9 +4,8 @@ import { ModalMapViewport } from '../ModalMapViewport';
 import { useMap } from '@/context/MapContext';
 import { PoiMarkers } from '../PoiMarkers';
 import { useEffect, useState } from 'react';
-import { GetReportZoneType } from '@/lib/firebase/reportZone';
 import { db, ref, onValue } from "../../lib/firebase/dbFirebase";
-import { User } from '@/types';
+import { GetReportZoneType, User } from '@/types';
 
 export interface ClickedPositionType {
     lat: number,
@@ -14,7 +13,7 @@ export interface ClickedPositionType {
 }
 
 
-export function MapViewport({user}: {user: User}) {
+export function MapViewport({ user }: { user: User }) {
     const { isOpenModal, openModalMap } = useMap()
     const [coordinates, setCoordinates] = useState<ClickedPositionType | null>(null)
     const [reportZone, setReportZone] = useState<GetReportZoneType[] | null>(null)
@@ -27,14 +26,19 @@ export function MapViewport({user}: {user: User}) {
                 setReportZone([]);
                 return;
             }
-            const reportZones = Object.keys(data).map(key => ({
-                key,
-                ...data[key]
-            })) as GetReportZoneType[];
+
+            const reportZones = Object.keys(data).flatMap(userId => {
+                const userZones = data[userId];
+
+                return Object.keys(userZones).map(zoneId => ({
+                    key: zoneId,        
+                    ...userZones[zoneId] 
+                }));
+            }) as GetReportZoneType[];
+
             setReportZone(reportZones);
         });
-     }, [])
-
+    }, [])
 
     function handleAddZone(e: any) {
 

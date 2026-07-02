@@ -15,7 +15,13 @@ export async function POST(request: Request) {
         })
 
         return NextResponse.json({ uid: userRecord.uid }, { status: 200 })
-    } catch (error) {
-        return NextResponse.json({ error  }, { status: 500 })
+    } catch (error: any) {
+        return NextResponse.json(
+            { 
+                code: error.code || "unknown_error",
+                message: error.message
+            },
+            { status: 400 }
+        )
     }
 }

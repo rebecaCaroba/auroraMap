@@ -9,8 +9,6 @@ export async function PATCH(request: Request) {
         const userRecord = await authAdmin.updateUser(body.uid, {
             displayName: body.userName,
         })
-        
-        console.log('Nome de usuário atualizado com sucesso:', userRecord)
 
         return NextResponse.json({ message: "Nome de usuário atualizado com sucesso"}, { status: 200 })
 
