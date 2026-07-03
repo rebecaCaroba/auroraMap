@@ -20,3 +20,31 @@
 button {
     cursor: pointer;
 }
+
+input::placeholder {
+    color: $c-gray-300;
+}
+
+.div-input {
+    position: relative;
+
+    button {
+
+        position: absolute;
+        right: 4%;
+        top: 55%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        background: none;
+        border: none;
+        
+        svg {
+            color: $c-gray-300;
+            font-size: 24px;
+        }
+    }
+}
+
+label {
+    font-weight: 600;
+}

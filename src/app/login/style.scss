@@ -1,18 +1,113 @@
 @import '../../style/config/variables';
 
 .login {
-    background-color: $c-gray-100;
+    background-color: #f5f3ff;
 
     @media (max-width: 768px) {
         padding: 1.5rem;
     }
 
     .login-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         min-height: 100vh;
+
+        .left {
+            color: $c-gray-100;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+
+            &::before {
+                content: '';
+                background: $c-gray-100;
+                opacity: 0.1;
+                border-radius: 50%;
+                width: 420px;
+                height: 420px;
+                top: 100%;
+                left: -80%;
+                position: absolute;
+            }
+
+            &::after {
+                content: '';
+                width: 280px;
+                height: 280px;
+                top: -60%;
+                right: -80%;
+                background: $c-gray-100;
+                opacity: 0.1;
+                border-radius: 50%;
+                position: absolute;
+            }
+
+            position: relative;
+            padding: 3rem 2rem;
+            height: 100vh;
+            background: linear-gradient(135deg, $c-first 0%, $c-secondary 100%);
+
+            .left-logo {
+                font-size: 2rem;
+                font-weight: 800;
+            }
+
+            .left-content {
+
+
+                h2 {
+                    font-size: clamp(1.8rem, 3vw, 2.6rem);
+                    font-weight: 800;
+                    line-height: 1.25;
+                    margin-bottom: 1rem;
+
+                    em {
+                        text-decoration: underline;
+                        text-underline-offset: 6px;
+                    }
+                }
+
+                p {
+                    color: $c-gray-150;
+                    font-size: 1rem;
+                    line-height: 1.7;
+                    max-width: 340px;
+                    margin-bottom: 2rem;
+                }
+            }
+
+            .left-stats {
+                display: flex;
+                gap: 2rem;
+
+                .left-stat {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    span {
+                        color: $c-gray-150;
+                        font-size: 0.9rem;
+                    }
+
+                    strong {
+                        font-size: 1.5rem;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+
+        .right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            @media (max-width: 768px) {
+                padding: 1.5rem;
+            }
+        }
 
         h1 {
             font-size: 2rem;
@@ -23,9 +118,6 @@
         }
 
         .login-content {
-            background-color: white;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            border: 0;
             border-radius: 8px;
             padding: 3rem 2rem;
             width: 100%;
@@ -54,19 +146,37 @@
                     transition: border-color 0.3s ease;
                 }
 
-                button {
+                input[type="submit"] {
                     margin-top: 1rem;
                     background: linear-gradient(45deg, $c-first, $c-secondary);
                     color: white;
                     padding: 12px 24px;
                     border: none;
-                    border-radius: 25px;
+                    border-radius: 14px;
                     text-decoration: none;
                     font-weight: 600;
+                    font-size: 1rem;
+                    cursor: pointer;
                     transition: transform 0.3s ease, box-shadow 0.3s ease;
                 }
 
+                span {
+                    text-align: center;
+                    margin-top: 1.4rem;
+                    font-size: .88rem;
+                    color: $c-gray-500;
 
+                    a {
+                        color: $c-first;
+                        text-decoration: none;
+                        font-weight: 600;
+                        transition: color 0.3s ease;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
             }
         }
 

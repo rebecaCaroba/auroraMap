@@ -110,7 +110,7 @@ export function FormRegister() {
             <span>
                 Já tem uma conta?<Link href="/login"> Conecte-se</Link>
             </span>
-            <button type='submit'>Cadastrar</button>
+            <input type='submit' value={"Criar conta"} />
         </form>
     )
 }

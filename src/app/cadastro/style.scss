@@ -54,7 +54,7 @@
                     transition: border-color 0.3s ease;
                 }
 
-                button {
+                input[type="submit"] {
                     margin-top: 1rem;
                     background: linear-gradient(45deg, $c-first, $c-secondary);
                     color: white;

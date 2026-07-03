@@ -6,6 +6,9 @@ import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from "react-hook-form";
 import { api } from "@/lib/axios";
+import { useState } from "react";
+import { IoMdEye, IoMdEyeOff  } from "react-icons/io";
+
 
 const LoginFormSchema = zod.object({
     email: zod.string().min(1, {message: 'O email é obrigatório'}).email('Digite um email válido'),
@@ -20,7 +23,7 @@ interface ErrorFormType {
 }
 
 export default function FormLogin() {
-    
+    const [isShowPassword, setIsShowPassword] = useState<boolean>(false)
     const router = useRouter()
 
     const {formState: {errors}, register, handleSubmit} = useForm<LoginFormDataInputs>({   
@@ -45,11 +48,11 @@ export default function FormLogin() {
 
     return (
         <div className='login-content'>
-            <h1>Login</h1>
+            <h1>Bem-vinda ao AuroraMap</h1>
             <form onSubmit={handleSubmit(handleLogin)} className="form-login">
                 <div className="form-group">
                     <label htmlFor="email">Email:</label>
-                    <input type="email" id="email" {...register('email')} />
+                    <input type="email" id="email" {...register('email')} placeholder="seuemail@email.com" />
                     <span className='form-span-message'>
                         {errors.email ? errors.email?.message : ''}
                     </span>
@@ -57,15 +60,22 @@ export default function FormLogin() {
 
                 <div className="form-group">
                     <label htmlFor="password">Senha:</label>
-                    <input type="password" id="password" {...register('password')} />
+
+                    <div className="div-input">
+                        <input type={`${isShowPassword ? "text" : "password"}`} id="password" {...register('password')} placeholder="••••••••" />
+                        <button className="" type="button" onClick={() => setIsShowPassword(!isShowPassword)}>
+                            {isShowPassword ? <IoMdEye /> : <IoMdEyeOff />}
+                        </button>
+                    </div>
+
                     <span className='form-span-message'>
                         {errors.password ? errors.password?.message : ''}
                     </span>
                 </div>
+                <input type="submit" value={"Entrar"}/>
                 <span>
                     Não tem conta?<Link href="/cadastro"> Cadastre-se</Link>
                 </span>
-                <button type='submit'>Entrar</button>
             </form>
         </div>
     )
