@@ -1,7 +1,7 @@
 @import '../../style/config/variables';
 
 .login {
-    background-color: #f5f3ff;
+    background-color: $c-lightviolet;
 
     @media (max-width: 768px) {
         padding: 1.5rem;
@@ -25,8 +25,8 @@
                 border-radius: 50%;
                 width: 420px;
                 height: 420px;
-                top: 100%;
-                left: -80%;
+                top: 69%;
+                left: -16%;
                 position: absolute;
             }
 
@@ -34,8 +34,8 @@
                 content: '';
                 width: 280px;
                 height: 280px;
-                top: -60%;
-                right: -80%;
+                top: -9%;
+                right: -9%;
                 background: $c-gray-100;
                 opacity: 0.1;
                 border-radius: 50%;

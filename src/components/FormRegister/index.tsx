@@ -61,6 +61,7 @@ export function FormRegister() {
                     type="userName"
                     id="userName"
                     {...register('userName')}
+                    placeholder='Digite seu nome'
                 />
                 <span className='form-span-message'>
                     {errors.userName ? errors.userName.message : ''}
@@ -72,6 +73,7 @@ export function FormRegister() {
                     type="email"
                     id="email"
                     {...register('email')}
+                    placeholder='Digite seu email'
                 />
                 <span className='form-span-message'>
                     {errors.email ? errors.email.message : ''}
@@ -84,6 +86,7 @@ export function FormRegister() {
                     type="password"
                     id="password"
                     {...register('password')}
+                    placeholder='Digite sua senha'
                 />
 
                 <span className='form-span-message'>
@@ -97,6 +100,7 @@ export function FormRegister() {
                     type="password"
                     id="confirmPassword"
                     {...register('confirmPassword')}
+                    placeholder='Confirme sua senha'
                 />
                 <span className='form-span-message'>
                     {errors.confirmPassword ? errors.confirmPassword.message : ''}
@@ -107,10 +111,10 @@ export function FormRegister() {
                 {errorForm ? errorForm.message : ''}
             </span>
 
+            <input type='submit' value={"Criar conta"} />
             <span>
                 Já tem uma conta?<Link href="/login"> Conecte-se</Link>
             </span>
-            <input type='submit' value={"Criar conta"} />
         </form>
     )
 }
