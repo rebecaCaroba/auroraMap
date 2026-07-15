@@ -1,32 +1,161 @@
 @import '../../style/config/variables';
 
 .profile {
-    background-color: $c-gray-100;
+    background-color: #f7f7fb;
     margin-top: 82px;
 
     .profile-container {
-        max-width: 720px;
+        max-width: 820px;
         margin: 0 auto;
         padding: 2rem 1.5rem;
 
         h1 {
             font-size: 2rem;
-            margin-bottom: 1.2rem;
             color: $c-gray-600;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid $c-gray-150;
+        }
+
+        p {
+            font-size: 1rem;
+            color: $c-gray-400;
+            margin-bottom: 1.5rem;
         }
 
         .profile-card {
-            background-color: white;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            border: 0;
-            border-radius: 8px;
-            padding: 1.5rem;
+            background-color: $c-white;
+            border: 1px solid $c-gray-150;
+            border-radius: 16px;
             margin-bottom: 1rem;
 
+            .info-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+
+
+                @media (max-width: 768px) {
+                    grid-template-columns: 1fr;
+                }
+
+
+                .profile-info {
+
+                    &:nth-child(odd) {
+                        border-right: 1px solid $c-gray-150;
+
+                        @media (max-width: 768px) {
+                            border-right: none;
+                            border-bottom: 1px solid $c-gray-150;
+                        }
+                    }
+
+                    h4 {
+                        font-size: 0.8rem;
+                        color: $c-gray-400;
+                        font-weight: 500;
+                        margin-bottom: .3rem;
+                        text-transform: uppercase;
+                        letter-spacing: .05em;
+                    }
+
+                    span {
+                        font-size: .92rem;
+                        font-weight: 600;
+                    }
+
+                    padding: 1rem;
+                }
+            }
+
+            .profile-edit {
+                padding: 1rem 1.6rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                border-top: 1px solid $c-gray-150;
+
+                button {
+                    display: flex;
+                    align-items: center;
+                    gap: .3rem;
+                    background: none;
+                    border: none;
+                    color: $c-first;
+                    font-size: .85rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    padding: 0;
+                    transition: opacity .2s;
+                }
+            }
+
+            .profile-edit-form {
+                padding: 1.4rem 1.6rem;
+                border-top: 1px solid $c-gray-150;
+                background: $c-gray-100;
+                gap: 1rem;
+                flex-direction: column;
+
+                label {
+                    display: block;
+                    margin-bottom: .3rem;
+                    font-size: 0.8rem;
+                    color: $c-gray-600;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: .05em;
+                }
+
+                input {
+                    padding: .65rem .9rem;
+                    border: 1px solid $c-gray-150;
+                    border-radius: 10px;
+                    font-size: .9rem;
+                    font-family: inherit;
+                    color: $c-gray-700;
+                    background: $c-white;
+                    outline: none;
+                    width: 100%;
+                    transition: border-color .2s, box-shadow .2s;
+                }
+
+                button[type="submit"] {
+                    height: 40px;
+                    background: linear-gradient(45deg, $c-first, $c-secondary);
+                    color: white;
+                    border: none;
+                    border-radius: 14px;
+                    text-decoration: none;
+                    font-weight: 600;
+                    padding: 0 1.2rem;
+                    cursor: pointer;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+                    &:hover {
+                        opacity: .7;
+                    }
+                }
+
+                .profile-edit-form-btn-cancel {
+                    margin-left: 1rem;
+                    height: 40px;
+                    background: $c-white;
+                    color: $c-gray-700;
+                    border: 1px solid $c-gray-300;
+                    border-radius: 14px;
+                    text-decoration: none;
+                    font-weight: 600;
+                    padding: 0 1.2rem;
+                    cursor: pointer;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+                    &:hover {
+                        opacity: .7;
+                    }
+                }
+            }
+
             .profile-card-config {
-                
+
                 button {
                     border: 0;
                     background-color: transparent;
@@ -52,65 +181,6 @@
                 color: $c-gray-600;
             }
 
-            form {
-                display: flex;
-                flex-direction: column;
-
-                .form-group {
-                    margin-bottom: 1rem;
-
-                }
-
-                .checkbox {
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                    justify-content: space-between;
-
-                    input {
-                        width: auto;
-                    }
-                    
-                }
-                
-                label {
-                    display: block;
-                    margin-bottom: 0.4rem;
-                }
-
-                input {
-                    width: 100%;
-                    padding: 12px;
-                    border: 2px solid $c-gray-150;
-                    border-radius: 8px;
-                    font-size: 14px;
-                    transition: border-color 0.3s ease;
-                }
-
-                button {
-                    margin-top: 1rem;
-                    background: linear-gradient(45deg, $c-first, $c-secondary);
-                    color: white;
-                    padding: 12px 24px;
-                    border: none;
-                    border-radius: 25px;
-                    text-decoration: none;
-                    font-weight: 600;
-                }
-
-                .profile-feedback {
-                    margin-top: 0.2rem;
-                    font-weight: 500;
-
-                    &.success {
-                        color: $c-green-100;
-                    }
-
-                    &.error {
-                        color: $c-red-100;
-                    }
-                }
-            }
         }
     }
 }

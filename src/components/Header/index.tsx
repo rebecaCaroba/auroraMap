@@ -1,6 +1,7 @@
 'use client'
 import { RiMenuFold4Line, RiMenuFold3Line } from "react-icons/ri";
-import { FaUserCircle } from "react-icons/fa";
+import { FaCircleUser } from "react-icons/fa6";
+
 import Link from 'next/link';
 import logo from '../../../public/aurora-boreal.png'
 import Image from "next/image";
@@ -42,7 +43,7 @@ export function Header({user}: {user?: User}) {
                             </li>
                             <li>
                                 <Link href="/perfil" className="profile-button">
-                                    <FaUserCircle size={24} /> <span id="header-username" >{user?.displayName ? user.displayName : ' '}</span>
+                                    <FaCircleUser size={24} /> <span id="header-username" >{user?.displayName ? user.displayName : ' '}</span>
                                 </Link>
                             </li>
                         </>
