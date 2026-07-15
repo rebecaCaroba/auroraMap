@@ -118,7 +118,14 @@ export function ProfileComponent({ user }: { user: User }) {
                 </div>
 
                 <div className='profile-card'>
-                    <div className='profile-card-config'>
+                    <div className='profile-card-signout'>
+                        <div>
+                            <strong>Sair da conta</strong>    
+                            <p>
+                                Você precisará fazer login novamente.
+                            </p>
+                        </div> 
+
                         <button onClick={handelLogout}>Sair</button>
                     </div>
                 </div>
