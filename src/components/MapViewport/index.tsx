@@ -56,7 +56,7 @@ export function MapViewport({ user }: { user: User }) {
         <div>
             {isOpenModal && <ModalMapViewport coordinates={coordinates} user={user} />}
 
-            <APIProvider apiKey={'AIzaSyAcl_NGzBDZUHYWLEAqEx8x6vKpt8ZtdAE'} onLoad={() => console.log('Maps API has loaded.')}>
+            <APIProvider apiKey={'AIzaSyAcl_NGzBDZUHYWLEAqEx8x6vKpt8ZtdAE'}>
                 <Map onClick={(e) => handleAddZone(e)}
                     style={{ width: '100vw', height: '100vh' }}
                     defaultCenter={{ lat: -23.5489, lng: -46.6389 }}

@@ -2,19 +2,15 @@
 
 .header {
     background-color: white;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 1000;
-    padding: 1rem;
-
+    border-bottom: 1px solid $c-gray-150;
+    padding: 1.4rem;
+    
     .header-content {
+        padding: 0 1.3rem;
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
 
         .header-button-menu-bar {
             display: none;
@@ -36,7 +32,7 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.3rem;
             font-weight: bold;
             color: $c-first;
             display: flex;
@@ -71,17 +67,21 @@
 
         .header-nav-links {
             display: flex;
-            gap: 1rem;
+            gap: 2rem;
             list-style: none;
 
             li a {
                 display: flex;
                 align-items: center;
                 gap: 0.5rem;
-                color: $c-gray-900;
+                color: $c-gray-500;
                 font-weight: 500;
                 text-decoration: none;
                 transition: color 0.3s ease;
+
+                &.active {
+                    color: $c-first;
+                }
 
                 &:hover {
                     color: $c-first;

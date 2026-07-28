@@ -1,5 +1,5 @@
 'use client'
-import { GetReportZoneType } from "@/lib/firebase/reportZone"
+import { GetReportZoneType } from "@/types"
 import { useMarkerFillColor } from "@/useMarkerFillColor"
 import { Marker, InfoWindow, useMarkerRef } from "@vis.gl/react-google-maps"
 import { useCallback, useState } from "react"

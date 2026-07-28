@@ -37,8 +37,7 @@ export function ModalEditZone({zoneEdit, setIsShowModalEditZone, userId}: ModalE
             description: zoneEdit.description,
         },
     })
-
-    console.log('zoneEdit', zoneEdit)
+    
     async function handleEditZone(data: EditReportZoneFormDataInputs, key: string) {
             try {
 

@@ -2,6 +2,7 @@
 
 .login {
     background-color: $c-lightviolet;
+    overflow: hidden;
 
     @media (max-width: 768px) {
         padding: 1.5rem;

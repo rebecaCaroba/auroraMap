@@ -7,11 +7,11 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as zod from 'zod'
-import { useUser } from '@/context/UserContext'
 import { User } from '@/types'
 import './style.scss'
 import { UserReportZones } from '../UserReportZones'
-import { MdEdit, MdOutlineKey  } from "react-icons/md";
+import { MdEdit, MdOutlineKey } from "react-icons/md";
+import { api } from '@/lib/axios'
 
 
 const updateNameSchema = zod.object({
@@ -22,7 +22,6 @@ type UpdateNameInputs = zod.infer<typeof updateNameSchema>
 
 export function ProfileComponent({ user }: { user: User }) {
     const router = useRouter()
-    const { logout } = useUser()
     const [isOpenEditName, setIsOpenEditName] = useState<boolean>(false)
 
     const {
@@ -57,8 +56,14 @@ export function ProfileComponent({ user }: { user: User }) {
         alert('E-mail de redefinição de senha enviado!')
     }
 
-    function handelLogout() {
-        logout()
+    async function handelLogout() {
+        try {
+            await api.post('/auth/logout')
+        } catch (error) {
+            console.error('Erro ao fazer logout:', error)
+        }
+
+
         router.push('/login')
     }
 
@@ -94,11 +99,11 @@ export function ProfileComponent({ user }: { user: User }) {
                                     </div>
 
                                     <button type='submit'>Alterar nome</button>
-                                    <button 
-                                        className='profile-edit-form-btn-cancel' 
+                                    <button
+                                        className='profile-edit-form-btn-cancel'
                                         onClick={() => { setIsOpenEditName((state) => !state) }}
                                     >
-                                            Cancelar
+                                        Cancelar
                                     </button>
                                 </form>
                             </div>
@@ -120,11 +125,11 @@ export function ProfileComponent({ user }: { user: User }) {
                 <div className='profile-card'>
                     <div className='profile-card-signout'>
                         <div>
-                            <strong>Sair da conta</strong>    
+                            <strong>Sair da conta</strong>
                             <p>
                                 Você precisará fazer login novamente.
                             </p>
-                        </div> 
+                        </div>
 
                         <button onClick={handelLogout}>Sair</button>
                     </div>

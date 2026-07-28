@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { MapProvider } from "@/context/MapContext";
-import { UserProvider } from "@/context/UserContext";
 import '../style/global.scss'
 
 export const metadata: Metadata = {
@@ -16,11 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <UserProvider>
           <MapProvider>
             {children}
           </MapProvider>
-        </UserProvider>
       </body>
     </html>
   );
