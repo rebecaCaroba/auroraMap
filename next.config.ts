@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "https://aurora-map.vercel.app/",
+            value: "https://aurora-map.vercel.app",
           },
           {
             key: "Access-Control-Allow-Methods",
