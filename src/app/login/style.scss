@@ -25,6 +25,10 @@
             display: flex;
             justify-content: space-between;
             flex-direction: column;
+            position: relative;
+            padding: 3rem 2rem;
+            height: 100vh;
+            background: linear-gradient(135deg, colors.$c-first 0%, colors.$c-secondary 100%);
 
             @media (max-width: 768px) {
                 display: none;
@@ -55,10 +59,6 @@
                 position: absolute;
             }
 
-            position: relative;
-            padding: 3rem 2rem;
-            height: 100vh;
-            background: linear-gradient(135deg, colors.$c-first 0%, colors.$c-secondary 100%);
 
             .left-logo {
                 font-size: 2rem;
