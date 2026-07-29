@@ -15,7 +15,7 @@ import { api } from '@/lib/axios'
 
 
 const updateNameSchema = zod.object({
-    userName: zod.string().min(1, { message: 'O nome é obrigatório' }),
+    userName: zod.string().min(2, { message: 'O nome é obrigatório' }),
 })
 
 type UpdateNameInputs = zod.infer<typeof updateNameSchema>
@@ -34,7 +34,13 @@ export function ProfileComponent({ user }: { user: User }) {
     })
 
     async function handleUpdateName(data: UpdateNameInputs) {
-        await updateUserName(data.userName)
+
+        if (data.userName.length < 1) {
+            alert('O nome não pode ser vazio.')
+            return
+        }
+
+        await updateUserName(data.userName, user.uid)
     }
 
     async function handleChangePassword() {
@@ -92,7 +98,7 @@ export function ProfileComponent({ user }: { user: User }) {
                                 <form onSubmit={handleSubmitName(handleUpdateName)}>
                                     <div className='form-group'>
                                         <label htmlFor='userName'>NOVO NOME:</label>
-                                        <input id='userName' type='text' {...registerName('userName')} placeholder={"Digite seu nome"} />
+                                        <input id='userName' type='text' {...registerName('userName')} placeholder={"Digite seu nome"} required/>
                                         <span className='form-span-message'>
                                             {nameErrors.userName ? nameErrors.userName.message : ''}
                                         </span>

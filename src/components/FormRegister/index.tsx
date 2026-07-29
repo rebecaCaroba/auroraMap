@@ -8,9 +8,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form';
 
 const RegisterFormSchema = zod.object({
-    userName: zod.string().min(1, { message: 'O nome é obrigatório' }),
+    userName: zod.string().min(2, { message: 'O nome deve ter pelo menos 2 caracteres' }),
     email: zod.string().min(1, { message: 'O email é obrigatório' }).email('Digite um email válido'),
-    password: zod.string().min(8, { message: 'A senha deve ter no mínimo 8 caracteres.' }),
+    password: zod.string().min(8, { message: 'A senha deve ter no mínimo 8 caracteres.' })
+    .regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, { message: 'A senha deve conter pelo menos uma letra, um número e um caractere especial.' }),
     confirmPassword: zod.string().min(8, { message: 'A confirmação de senha deve ter no mínimo 8 caracteres.' }),
 })
     .refine((data) => data.password === data.confirmPassword, {
