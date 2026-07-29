@@ -39,6 +39,7 @@
 
 
                 .profile-info {
+                    padding: 1rem;
 
                     &:nth-child(odd) {
                         border-right: 1px solid colors.$c-gray-150;
@@ -63,7 +64,6 @@
                         font-weight: 600;
                     }
 
-                    padding: 1rem;
                 }
             }
 
