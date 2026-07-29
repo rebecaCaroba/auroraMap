@@ -77,7 +77,7 @@ export function ProfileComponent({ user }: { user: User }) {
                     <div className="info-grid">
                         <div className="profile-info">
                             <h4>NOME</h4>
-                            <span>{user?.displayName}</span>
+                            <span id='profile-info-span'>{user?.displayName}</span>
                         </div>
                         <div className="profile-info">
                             <h4>E-MAIL</h4>

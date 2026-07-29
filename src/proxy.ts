@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { authAdmin } from "./lib/firebase/firebase-admin";
 
-export async function middleware(request:NextRequest) {
+export async function proxy(request:NextRequest) {
 
     const hasSessionCookie = request.cookies.has('session') 
 

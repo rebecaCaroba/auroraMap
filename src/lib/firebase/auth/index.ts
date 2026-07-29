@@ -5,6 +5,8 @@ import {
     updateProfile, 
     sendPasswordResetEmail 
 } from "../dbFirebase";
+import { db, ref, update } from "../dbFirebase";
+
 import { api } from "@/lib/axios";
 
 export async function signIn(email: string, password: string) {
@@ -46,7 +48,7 @@ export async function createUser(userName: string, email: string, password: stri
     return { response, err }
 }
 
-export async function updateUserName(userName: string) {
+export async function updateUserName(userName: string, userUid: string) {
     let response = null
     let err = null
 
@@ -57,12 +59,16 @@ export async function updateUserName(userName: string) {
 
     await updateProfile(auth.currentUser, { displayName: userName }).then(() => {
         const headerUsername = document.getElementById('header-username');
+        const spanUsername = document.getElementById('profile-info-span');
 
-        if(headerUsername) {
+        if(headerUsername && spanUsername) {
             headerUsername.textContent = userName
+            spanUsername.textContent = userName
 
             response = userName
+
         }
+        
         
     }).catch((error) => {
         err = 'Não foi possível atualizar o nome'

@@ -22,11 +22,6 @@ export function PoiMarkers({ zone, setActiveMarker, activeMarker }: PoiMarkersPr
 
     const markerFillColor = useMarkerFillColor(zone.severity)
 
-    function formatDate(dateValue: string) {
-        const date = new Date(dateValue)
-        return date.toLocaleDateString('pt-BR')
-    }
-
     return (
         <>
             <Marker
@@ -75,7 +70,7 @@ export function PoiMarkers({ zone, setActiveMarker, activeMarker }: PoiMarkersPr
                         </div>
                         <div className="info-header">
                             <p>Reportado por: <span className="info-username"> {zone.userName}</span></p>
-                            <p className="info-date">Data: {formatDate(zone.date)}</p>
+                            <p className="info-date">Data: {zone.date}</p>
                         </div>
                     </div>
                 </InfoWindow>
