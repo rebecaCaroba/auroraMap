@@ -1,12 +1,15 @@
-@import '../../style/config/variables';
+@use '../../style/config/variables';
+@use "../../style/config/colors";
+@use "../../style/config/fonts";
+
 
 .home-hero {
-    background: linear-gradient(135deg, $c-first 0%, $c-secondary 100%);
+    background: linear-gradient(135deg, colors.$c-first 0%, colors.$c-secondary 100%);
     padding: 10rem 0 7rem;
 
 
     .container {
-        color: $c-gray-100;
+        color: colors.$c-gray-100;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -19,9 +22,9 @@
             gap: 1rem;
 
             .btn-primary {
-                background-color: $c-gray-100;
+                background-color: colors.$c-gray-100;
                 text-decoration: none;
-                color: $c-first;
+                color: colors.$c-first;
                 padding: 0.900rem;
                 border-radius: 30px;
                 font-weight: 600;
@@ -32,9 +35,9 @@
 
             .btn-secondary {
                 background-color: rgba(255, 255, 255, 0.464);
-                border: 2px solid $c-gray-100;
+                border: 2px solid colors.$c-gray-100;
                 text-decoration: none;
-                color: $c-gray-100;
+                color: colors.$c-gray-100;
                 padding: 0.900rem;
                 border-radius: 30px;
                 font-weight: 600;
@@ -49,18 +52,18 @@
         }
 
         h1 {
-            font-size: $h;
+            font-size: fonts.$h;
             margin-bottom: 1rem;
             font-weight: 700;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 
             @media (max-width: 768px) {
-                font-size: $h-mobile;
+                font-size: fonts.$h-mobile;
             }
         }
 
         p {
-            font-size: $h5;
+            font-size: fonts.$h5;
             margin-bottom: 2rem;
             opacity: 0.9;
             max-width: 600px;
@@ -80,7 +83,7 @@
 
         .home-how-it-works-title {
             text-align: center;
-            color: $c-gray-900;
+            color: colors.$c-gray-900;
             font-size: 2.5rem;
             margin-bottom: 3rem;
         }
@@ -93,15 +96,15 @@
             margin-top: 3rem;
 
             .home-feature-card {
-                background-color: $c-gray-100;
-                border: 1px solid $c-gray-150;
+                background-color: colors.$c-gray-100;
+                border: 1px solid colors.$c-gray-150;
                 padding: 2rem;
                 border-radius: 15px;
 
                 .home-feature-icon {
                     text-align: center;
                     font-size: 3rem;
-                    color: $c-first;
+                    color: colors.$c-first;
                 }
 
                 h3,
@@ -115,7 +118,7 @@
                 }
 
                 p {
-                    color: $c-gray-700;
+                    color: colors.$c-gray-700;
                     line-height: 1.6;
                 }
             }
@@ -145,18 +148,18 @@
             }
 
             p {
-                color: $c-gray-700;
+                color: colors.$c-gray-700;
             }
 
             .home-step-number {
-                background-color: $c-first;
+                background-color: colors.$c-first;
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 width: 3.75rem;
                 height: 3.75rem;
-                color: $c-gray-100;
+                color: colors.$c-gray-100;
                 font-size: 1.5rem;
                 font-weight: bold;
                 margin: 0 auto 1rem;
@@ -166,8 +169,8 @@
 }
 
 .home-footer {
-    background-color: $c-gray-700;
-    color: $c-gray-100;
+    background-color: colors.$c-gray-700;
+    color: colors.$c-gray-100;
     text-align: center;
 
     .container {
@@ -179,7 +182,7 @@
             margin-bottom: 2rem;
 
             h3 {
-                color: $c-first;
+                color: colors.$c-first;
                 margin-bottom: 1rem;
             }
 
@@ -187,7 +190,7 @@
                 display: inline-flex;
                 align-items: center;
                 gap: 0.5rem;
-                color: $c-gray-200;
+                color: colors.$c-gray-200;
                 text-decoration: none;
             }
 
@@ -195,7 +198,7 @@
 
         .home-footer-bottom {
             padding: 1.5rem;
-            border-top: 1px solid $c-gray-500;
+            border-top: 1px solid colors.$c-gray-500;
         }
     }
 

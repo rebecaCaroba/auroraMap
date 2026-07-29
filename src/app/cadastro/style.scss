@@ -1,7 +1,9 @@
-@import '../../style/config/variables';
+@use '../../style/config/variables';
+@use "../../style/config/colors";
+
 
 .cadastro {
-    background-color: $c-lightviolet;
+    background-color: colors.$c-lightviolet;
 
     @media (max-width: 768px) {
         padding: 1.5rem;
@@ -13,14 +15,14 @@
         min-height: 100vh;
 
         .left {
-            color: $c-gray-100;
+            color: colors.$c-gray-100;
             display: flex;
             justify-content: space-between;
             flex-direction: column;
 
             &::before {
                 content: '';
-                background: $c-gray-100;
+                background: colors.$c-gray-100;
                 opacity: 0.1;
                 border-radius: 50%;
                 width: 420px;
@@ -36,7 +38,7 @@
                 height: 280px;
                 top: -9%;
                 right: -9%;
-                background: $c-gray-100;
+                background: colors.$c-gray-100;
                 opacity: 0.1;
                 border-radius: 50%;
                 position: absolute;
@@ -45,7 +47,7 @@
             position: relative;
             padding: 3rem 2rem;
             height: 100vh;
-            background: linear-gradient(135deg, $c-first 0%, $c-secondary 100%);
+            background: linear-gradient(135deg, colors.$c-first 0%, colors.$c-secondary 100%);
 
             .left-logo {
                 font-size: 2rem;
@@ -68,7 +70,7 @@
                 }
 
                 p {
-                    color: $c-gray-150;
+                    color: colors.$c-gray-150;
                     font-size: 1rem;
                     line-height: 1.7;
                     max-width: 340px;
@@ -86,7 +88,7 @@
                     align-items: center;
 
                     span {
-                        color: $c-gray-150;
+                        color: colors.$c-gray-150;
                         font-size: 0.9rem;
                     }
 
@@ -112,9 +114,9 @@
         h1 {
             font-size: 2rem;
             margin-bottom: 1rem;
-            color: $c-gray-600;
+            color: colors.$c-gray-600;
             padding-bottom: 1rem;
-            border-bottom: 2px solid $c-gray-150;
+            border-bottom: 2px solid colors.$c-gray-150;
         }
 
        
@@ -141,7 +143,7 @@
                 input {
                     width: 100%;
                     padding: 12px;
-                    border: 2px solid $c-gray-150;
+                    border: 2px solid colors.$c-gray-150;
                     border-radius: 8px;
                     font-size: 14px;
                     transition: border-color 0.3s ease;
@@ -149,7 +151,7 @@
 
                 input[type="submit"] {
                     margin-top: 1rem;
-                    background: linear-gradient(45deg, $c-first, $c-secondary);
+                    background: linear-gradient(45deg, colors.$c-first, colors.$c-secondary);
                     color: white;
                     padding: 12px 24px;
                     border: none;
@@ -165,10 +167,10 @@
                     text-align: center;
                     margin-top: 1.4rem;
                     font-size: .88rem;
-                    color: $c-gray-500;
+                    color: colors.$c-gray-500;
 
                     a {
-                        color: $c-first;
+                        color: colors.$c-first;
                         text-decoration: none;
                         font-weight: 600;
                         transition: color 0.3s ease;

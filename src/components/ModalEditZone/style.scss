@@ -1,4 +1,6 @@
-@import '../../style/config/variables';
+@use '../../style/config/variables';
+@use "../../style/config/colors";
+
 
 .modal-edit-zone {
     position: fixed;
@@ -12,7 +14,7 @@
 }
 
 .modal-edit-zone-content {
-    background-color: $c-gray-100;
+    background-color: colors.$c-gray-100;
     margin: 13% auto;
     padding: 30px;
     border-radius: 15px;
@@ -61,7 +63,7 @@
 .form-group textarea:focus,
 .form-group input:focus {
     outline: none;
-    border-color: $c-first;
+    border-color: colors.$c-first;
 }
 
 .form-group textarea {
@@ -77,7 +79,7 @@
     gap: 10px;
 
     button[type="submit"] {
-        background: linear-gradient(45deg, $c-first, $c-secondary);
+        background: linear-gradient(45deg, colors.$c-first, colors.$c-secondary);
         color: white;
         border: none;
         border-radius: 14px;
@@ -96,8 +98,8 @@
 
     button[type="button"] {
         background: none;
-        border: 2px solid $c-gray-300;
-        color: $c-gray-700;
+        border: 2px solid colors.$c-gray-300;
+        color: colors.$c-gray-700;
         border-radius: 14px;
         text-decoration: none;
         font-weight: 600;

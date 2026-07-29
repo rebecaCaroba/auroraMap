@@ -1,4 +1,6 @@
-@import '../../style/config/variables';
+@use '../../style/config/variables';
+@use "../../style/config/colors";
+
 
 .modal {
     position: fixed;
@@ -12,7 +14,7 @@
 }
 
 .modal-content {
-    background-color: $c-gray-100;
+    background-color: colors.$c-gray-100;
     margin: 5% auto;
     padding: 30px;
     border-radius: 15px;
@@ -39,7 +41,7 @@
     align-items: center;
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 2px solid $c-gray-150;
+    border-bottom: 2px solid colors.$c-gray-150;
 }
 
 .modal-header {
@@ -51,7 +53,7 @@
 }
 
 .close {
-    color: $c-gray-150;
+    color: colors.$c-gray-150;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
@@ -59,7 +61,7 @@
 }
 
 .close:hover {
-    color: $c-first;
+    color: colors.$c-first;
 }
 
 .form-group {
@@ -90,7 +92,7 @@
 .form-group textarea:focus,
 .form-group input:focus {
     outline: none;
-    border-color: $c-first;
+    border-color: colors.$c-first;
 }
 
 .form-group textarea {
@@ -106,26 +108,26 @@
 }
 
 .btn-cancel {
-    background: $c-red-100;
+    background: colors.$c-red-100;
     font-weight: bold;
     height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    color: $c-gray-100;
+    color: colors.$c-gray-100;
     border-radius: 8px;
     border: 0;
 }
 
 .btn-submit {
-    background: $c-first;
+    background: colors.$c-first;
     height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    color: $c-gray-100;
+    color: colors.$c-gray-100;
     border-radius: 8px;
     border: 0;
     font-weight: bold;
