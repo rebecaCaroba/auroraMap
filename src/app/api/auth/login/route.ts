@@ -1,4 +1,5 @@
 import { authAdmin } from "@/lib/firebase/firebase-admin";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -15,9 +16,9 @@ export async function POST(request: Request) {
 
         const sessionCookie = await authAdmin.createSessionCookie(body.token, { expiresIn: expires })
 
-        const res = NextResponse.json({ success: true });
+        const cookieStore = await cookies();
 
-        res.cookies.set('session', sessionCookie, {
+        cookieStore.set('session', sessionCookie, {
             httpOnly: true,
             secure: true,
             maxAge: expires / 1000,
@@ -25,7 +26,7 @@ export async function POST(request: Request) {
             sameSite: 'lax',
         })
 
-        return res
+        return NextResponse.json({ success: true });
 
     } catch (error) {
         return NextResponse.json({ message: "Erro ao fazer login", error }, { status: 500 })
