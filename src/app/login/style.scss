@@ -15,11 +15,21 @@
         grid-template-columns: 1fr 1fr;
         min-height: 100vh;
 
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;    
+        }
+
         .left {
             color: colors.$c-gray-100;
             display: flex;
             justify-content: space-between;
             flex-direction: column;
+
+            @media (max-width: 768px) {
+                display: none;
+                
+            }
 
             &::before {
                 content: '';
