@@ -14,6 +14,10 @@ export function Header({user}: {user?: User}) {
     const [isMenuBar, setIsMenuBar] = useState<boolean>(false)
     const router = usePathname(); 
     
+    const handleMenuBar = () => {
+        setIsMenuBar(!isMenuBar)
+    }
+
     return (
         <header className='header'>
             <nav className='header-content'>
@@ -24,10 +28,10 @@ export function Header({user}: {user?: User}) {
                 <ul className={`header-nav-links ${isMenuBar ? 'header-is-menu-bar' : ' '}`}>
                     {router == '/' ? (
                         <>
-                            <li><a href="#home">Início</a></li>
-                            <li><a href="#home-home-features">Recursos</a></li>
-                            <li><a href="#home-how-it-works">Como Funciona</a></li>
-                            <li><a href="#contact">Contato</a></li>
+                            <li><a href="#home" onClick={handleMenuBar}>Início</a></li>
+                            <li><a href="#home-home-features" onClick={handleMenuBar}>Recursos</a></li>
+                            <li><a href="#home-how-it-works" onClick={handleMenuBar}>Como Funciona</a></li>
+                            <li><a href="#contact" onClick={handleMenuBar}>Contato</a></li>
                             <div className='header-buttons'>
                                 <Link href="/cadastro" className="register-button"> Cadastro</Link>
                                 <Link href="/login" className="login-button"> Login</Link>
@@ -52,7 +56,7 @@ export function Header({user}: {user?: User}) {
                 </ul>
 
                 <div className="header-button-menu-bar">
-                    <button onClick={() => setIsMenuBar(!isMenuBar)}>
+                    <button onClick={handleMenuBar}>
 
                         {isMenuBar ? <RiMenuFold4Line size={32} /> : <RiMenuFold3Line size={32} />}
                     </button>

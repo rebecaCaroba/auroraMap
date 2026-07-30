@@ -19,7 +19,7 @@ export default function Home() {
             <h1>Mapeamento Colaborativo de Segurança</h1>
             <p>Ajude a criar uma comunidade mais segura reportando e compartilhando informações sobre zonas de perigo em tempo real.</p>
             <div className="home-hero-buttons">
-                <Link href="indext.html" className="btn-primary">
+                <Link href="/login" className="btn-primary">
                     <AiOutlineCaretRight size={24} />
                     Começar Agora
                 </Link>
@@ -98,14 +98,9 @@ export default function Home() {
                     <p>Clique no mapa para marcar uma nova zona de perigo e forneça detalhes sobre o tipo de risco.</p>
                 </div>
                 <div className="home-step">
-                    <div className="home-step-number">3</div>
-                    <h3>Valide Informações</h3>
-                    <p>Confirme ou conteste reportes de outros usuários para manter a precisão das informações.</p>
-                </div>
-                <div className="home-step">
                     <div className="home-step-number">4</div>
-                    <h3>Mantenha-se Informado</h3>
-                    <p>Receba alertas e atualizações sobre mudanças na segurança da sua área.</p>
+                    <h3>Proteja a comunidade</h3>
+                    <p>Seu reporte aparece no mapa e ajuda outras mulheres a se deslocar com mais segurança.</p>
                 </div>
             </div>
         </div>
@@ -122,22 +117,15 @@ export default function Home() {
                     <h3>Links Rápidos</h3>
                     <p><a href="#home">Início</a></p>
                     <p><a href="#home-home-features">Recursos</a></p>
-                    <p><a href="indext.html">Mapa</a></p>
                 </div>
                 <div className="home-footer-section">
                     <h3>Contato</h3>
                     <p><a href="mailto:contato@auroramap.com">contato@auroramap.com</a></p>
                     <p><a href="tel:+5511999999999">(11) 99999-9999</a></p>
                 </div>
-                <div className="home-footer-section">
-                    <h3>Redes Sociais</h3>
-                    <p><a href="#"><FaFacebook /> Facebook</a></p>
-                    <p><a href="#"><FaTwitter /> Twitter</a></p>
-                    <p><a href="#"><FaInstagram/>Instagram</a></p>
-                </div>
             </div>
             <div className="home-footer-bottom">
-                <p>&copy; 2024 AuroraMap. Todos os direitos reservados.</p>
+                <p>&copy; 2026 AuroraMap. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
