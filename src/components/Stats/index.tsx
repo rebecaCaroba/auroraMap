@@ -1,28 +1,28 @@
 import './style.scss';
+import { CounterStats } from '../CounterStats';
 
 export function Stats() {
+
+    const statsData =
+        [
+            { id: 1, value: 2547, label: 'Zonas Mapeadas' },
+            { id: 2, value: 8392, label: 'Usuários Ativos' },
+            { id: 3, value: 156, label: 'Cidades Cobertas' },
+            { id: 4, value: "99%", label: 'Tempo de Atividade' },
+        ]
+
     return (
         <section className="stats">
-        <div className="container">
-            <div className="stats-grid">
-                <div className="stat-item">
-                    <h3>2,547</h3>
-                    <p>Zonas Mapeadas</p>
-                </div>
-                <div className="stat-item">
-                    <h3>8,392</h3>
-                    <p>Usuários Ativos</p>
-                </div>
-                <div className="stat-item">
-                    <h3>156</h3>
-                    <p>Cidades Cobertas</p>
-                </div>
-                <div className="stat-item">
-                    <h3>99.2%</h3>
-                    <p>Tempo de Atividade</p>
+            <div className="container">
+                <div className="stats-grid">
+                    {statsData.map((stat) => (
+                        <div className="stat-item" key={stat.id}>
+                            <h3><CounterStats target={stat.value} /></h3>
+                            <p>{stat.label}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     )
 }
