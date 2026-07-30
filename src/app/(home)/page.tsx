@@ -47,21 +47,7 @@ export default function Home() {
                        <HiMiniUserGroup />
                     </div>
                     <h3>Colaboração Comunitária</h3>
-                    <p>Contribua com a segurança da comunidade reportando incidentes e validando informações de outros usuários.</p>
-                </div>
-                <div className="home-feature-card">
-                    <div className="home-feature-icon">
-                      <IoIosNotifications />
-                    </div>
-                    <h3>Alertas em Tempo Real</h3>
-                    <p>Receba notificações instantâneas sobre novos riscos identificados na sua região.</p>
-                </div>
-                <div className="home-feature-card">
-                    <div className="home-feature-icon">
-                     <BsGraphUp />
-                    </div>
-                    <h3>Análise de Dados</h3>
-                    <p>Visualize estatísticas e tendências de segurança para tomar decisões mais informadas.</p>
+                    <p>Contribua com a segurança da comunidade reportando incidentes.</p>
                 </div>
                 <div className="home-feature-card">
                     <div className="home-feature-icon">
@@ -70,19 +56,11 @@ export default function Home() {
                     <h3>Acesso Mobile</h3>
                     <p>Use o aplicativo em qualquer dispositivo, a qualquer hora e em qualquer lugar.</p>
                 </div>
-                <div className="home-feature-card">
-                    <div className="home-feature-icon">
-                      <FaShield />
-                    </div>
-                    <h3>Segurança e Privacidade</h3>
-                    <p>Seus dados estão protegidos com criptografia avançada e políticas rigorosas de privacidade.</p>
-                </div>
             </div>
         </div>
     </section>
 
     <Stats />
-
     <section className="home-how-it-works" id="home-how-it-works">
         <div className="container">
             <h2 className="home-how-it-works-title">Como Funciona</h2>
@@ -105,6 +83,7 @@ export default function Home() {
             </div>
         </div>
     </section>
+
 
     <footer className="home-footer" id="contact">
         <div className="container">
